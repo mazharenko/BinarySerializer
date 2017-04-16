@@ -17,14 +17,18 @@ namespace BinarySerializer
 
         public static void Serialize(object contract, Stream destination)
         {
-            Serialize(contract, destination, new ContractSerializationSettings());
+            Serialize(contract, destination, new SerializationSettings());
         }
 
-        public static void Serialize(object contract, Stream destination, ContractSerializationSettings settings)
+        public static void Serialize(object contract, Stream destination, SerializationSettings settings)
         {
             if (contract == null) throw new ArgumentNullException(nameof(contract));
             if (destination == null) throw new ArgumentNullException(nameof(destination));
-            var d = new ContractReader(settings).CollectMembers(contract.GetType(), contract);
+            var context = new SerializationContext(settings, destination);
+            foreach (var contractMemberAdapter in new ContractReader(context).CollectMembers(contract.GetType(), contract))
+            {
+                context.ProvideWriter(contractMemberAdapter).Write(contractMemberAdapter, context);
+            }
         }
     }
 }

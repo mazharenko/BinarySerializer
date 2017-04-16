@@ -14,8 +14,6 @@ namespace BinarySerializer.UnitTests.Contracts
 
     public class ComplexObject
     {
-        [SerializerMember(1)]
-        public string String { get; set; }
         [SerializerMember(2)]
         public ComplexObject2 ComplexObject2;
 
@@ -26,5 +24,8 @@ namespace BinarySerializer.UnitTests.Contracts
     {
         [SerializerMember(10)]
         public Class1 Class1 { get; set; }
+
+        [SerializerMember(7)]
+        public int Integer { get; set; }
     }
 }

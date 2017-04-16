@@ -9,27 +9,28 @@ namespace BinarySerializer
 {
     internal class ContractReader
     {
-        private readonly ContractSerializationSettings _settings;
+        private readonly SerializationContext _context;
 
-        public ContractReader(ContractSerializationSettings settings)
+        public ContractReader(SerializationContext settings)
         {
-            _settings = settings;
+            _context = settings;
         }
-
+// todo что теперь делать с этой проверкой
         public void ValidateContractType(Type type)
         {
             if (type == null) throw new ArgumentNullException(nameof(type));
 
 
-            if (type.IsGenericParameter || type.IsGenericTypeDefinition || type.IsAbstract
+            // todo: или забить, пусть десериализация упадет, если что
+            // либо создаваемый, либо конвертируемый
+            /*if (type.IsGenericParameter || type.IsGenericTypeDefinition || type.IsAbstract
                 || type.GetConstructor(new Type[0]) == null)
-                throw new InvalidConfigurationException($"The specified type can't by instantiated - {type}");
+                throw new InvalidConfigurationException($"The specified type can't by instantiated - {type}");*/
         }
 
         private bool IsTerminalType(Type type)
         {
-            // TODO: collections
-            return _settings.Converters.Contains(type);
+            return false;
         }
 
         public ICollection<ContractMemberAdapter> CollectMembers(Type type, object contract)

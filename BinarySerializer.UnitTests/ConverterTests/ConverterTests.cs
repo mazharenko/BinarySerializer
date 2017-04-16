@@ -1,6 +1,6 @@
 ﻿using System.IO;
-using BinarySerializer.Writers.Converters;
-using BinarySerializer.Writers.Converters.Integer;
+using BinarySerializer.Converters;
+using BinarySerializer.Converters.Integer;
 using NUnit.Framework;
 
 namespace BinarySerializer.UnitTests.ConverterTests
@@ -32,7 +32,7 @@ namespace BinarySerializer.UnitTests.ConverterTests
         protected void Test<TConverter>(object source, byte[] expected) where TConverter : IConverter, new()
         {
             var stream = new MemoryStream();
-            new TConverter().Write(source, stream);
+            new TConverter().Convert(source, stream);
             CollectionAssert.AreEqual(expected, stream.ToArray());
         }
     }

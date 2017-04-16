@@ -4,7 +4,7 @@ using BinarySerializer.Attributes;
 
 namespace BinarySerializer
 {
-    internal abstract class ContractMemberAdapter
+    public abstract class ContractMemberAdapter
     {
         protected object Contract { get; }
         public int Id { get; }

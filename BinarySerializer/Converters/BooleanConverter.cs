@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace BinarySerializer.Writers.Converters
+namespace BinarySerializer.Converters
 {
     internal class BooleanConverter : Converter<bool>
     {

@@ -1,6 +1,6 @@
 using System.IO;
 
-namespace BinarySerializer.Writers.Converters.Integer
+namespace BinarySerializer.Converters.Integer
 {
     internal class UIntConverter : UnsignedIntegerConverter<uint>
     {

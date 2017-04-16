@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using BinarySerializer.Converters;
+using BinarySerializer.Exceptions;
 using BinarySerializer.Writers;
-using BinarySerializer.Writers.Converters;
 
 namespace BinarySerializer
 {
@@ -10,9 +12,9 @@ namespace BinarySerializer
     {
         private readonly IDictionary<Type, IConverter> _collectionImplementation;
 
-        public ConvertersCollection()
+        public ConvertersCollection(IEnumerable<IConverter> source)
         {
-            _collectionImplementation = new Dictionary<Type, IConverter>();
+            _collectionImplementation = source.ToDictionary(c => c.Type);
         }
         
         public IEnumerator<IConverter> GetEnumerator()
@@ -25,14 +27,29 @@ namespace BinarySerializer
             return ((IEnumerable) _collectionImplementation).GetEnumerator();
         }
 
+        public IConverter FindExact(Type @for) => _collectionImplementation[@for];
+
+        public IConverter Find(Type @for)
+        {
+            var currentType = @for;
+            while (currentType != null)
+            {
+                IConverter converter;
+                if (_collectionImplementation.TryGetValue(currentType, out converter))
+                    return converter;
+                currentType = currentType.BaseType;
+            }
+            return null;
+        }
+
         public void Add(IConverter item)
         {
-            _collectionImplementation[item.Type] = item;
+            throw new NotSupportedException();
         }
 
         public void Clear()
         {
-            _collectionImplementation.Clear();
+            throw new NotSupportedException();
         }
 
         public bool Contains(IConverter item)
@@ -50,21 +67,13 @@ namespace BinarySerializer
             _collectionImplementation.Values.CopyTo(array, arrayIndex);
         }
 
-
         public bool Remove(IConverter item)
         {
-            if (_collectionImplementation.ContainsKey(item.Type) && _collectionImplementation[item.Type] == item)
-                return Remove(item.Type);
-            return false;
-        }
-
-        public bool Remove(Type type)
-        {
-            return _collectionImplementation.Remove(type);
+            throw new NotSupportedException();
         }
 
         public int Count => _collectionImplementation.Count;
 
-        public bool IsReadOnly => _collectionImplementation.IsReadOnly;
+        public bool IsReadOnly => true;
     }
 }

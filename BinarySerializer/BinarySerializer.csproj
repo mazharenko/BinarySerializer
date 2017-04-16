@@ -39,29 +39,39 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Attributes\SerializerContractAttribute.cs" />
     <Compile Include="Attributes\SerializerMemberAttribute.cs" />
     <Compile Include="ContractFieldAdapter.cs" />
     <Compile Include="ContractMemberAdapter.cs" />
     <Compile Include="ContractPropertyAdapter.cs" />
     <Compile Include="ContractReader.cs" />
-    <Compile Include="ContractSerializationSettings.cs" />
+    <Compile Include="ContractSerializationWriterFactory.cs" />
+    <Compile Include="Exceptions\InvalidMemberException.cs" />
+    <Compile Include="IContractSerializationWriterFactory.cs" />
+    <Compile Include="SerializationSettings.cs" />
     <Compile Include="ContractSerializer.cs" />
+    <Compile Include="Converters\BooleanConverter.cs" />
+    <Compile Include="Converters\Converter.cs" />
+    <Compile Include="Converters\IConverter.cs" />
+    <Compile Include="Converters\Integer\IntConverter.cs" />
+    <Compile Include="Converters\Integer\IntegerConverter.cs" />
+    <Compile Include="Converters\Integer\LongConverter.cs" />
+    <Compile Include="Converters\Integer\SignedIntegerConverter.cs" />
+    <Compile Include="Converters\Integer\UIntConverter.cs" />
+    <Compile Include="Converters\Integer\ULongConverter.cs" />
+    <Compile Include="Converters\Integer\UnsignedIntegerConverter.cs" />
     <Compile Include="Exceptions\DuplicateMemberIdsException.cs" />
     <Compile Include="Exceptions\InvalidConfigurationException.cs" />
+    <Compile Include="Exceptions\UnknownTypeException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ConvertersCollection.cs" />
-    <Compile Include="Writers\Converters\BooleanConverter.cs" />
-    <Compile Include="Writers\Converters\Converter.cs" />
-    <Compile Include="Writers\Converters\IConverter.cs" />
-    <Compile Include="Writers\Converters\Integer\IntConverter.cs" />
-    <Compile Include="Writers\Converters\Integer\IntegerConverter.cs" />
-    <Compile Include="Writers\Converters\Integer\LongConverter.cs" />
-    <Compile Include="Writers\Converters\Integer\SignedIntegerConverter.cs" />
-    <Compile Include="Writers\Converters\Integer\UIntConverter.cs" />
-    <Compile Include="Writers\Converters\Integer\ULongConverter.cs" />
-    <Compile Include="Writers\Converters\Integer\UnsignedIntegerConverter.cs" />
+    <Compile Include="SerializationContext.cs" />
+    <Compile Include="Writers\ContractWriter.cs" />
+    <Compile Include="Writers\ConvertationWriter.cs" />
     <Compile Include="Writers\ISerializationWriter.cs" />
+    <Compile Include="Writers\Providers\ContractWriterProvider.cs" />
+    <Compile Include="Writers\Providers\ConvertationWriterProvider.cs" />
+    <Compile Include="Writers\Providers\IContractWriterProvider.cs" />
+    <Compile Include="Writers\SerializationWriterWithHeader.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

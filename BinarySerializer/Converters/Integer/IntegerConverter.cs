@@ -1,6 +1,6 @@
 using System.IO;
 
-namespace BinarySerializer.Writers.Converters.Integer
+namespace BinarySerializer.Converters.Integer
 {
     // 0001 if negative, 0000 if non-negative
     // 4 bits - size, how many bytes is enough to store value, 0 for 0 and -1

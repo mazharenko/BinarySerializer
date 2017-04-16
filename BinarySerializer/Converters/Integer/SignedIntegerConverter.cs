@@ -1,7 +1,7 @@
 using System;
 using System.IO;
 
-namespace BinarySerializer.Writers.Converters.Integer
+namespace BinarySerializer.Converters.Integer
 {
     internal abstract class SignedIntegerConverter<T> : IntegerConverter<T>
     {

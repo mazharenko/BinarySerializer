@@ -1,7 +1,9 @@
-﻿namespace BinarySerializer.Writers
-{
-    internal interface ISerializationWriter
-    {
+﻿using System.IO;
 
+namespace BinarySerializer.Writers
+{
+    public interface ISerializationWriter
+    {
+        void Write(ContractMemberAdapter memberAdapter, SerializationContext serializationContext);
     }
 }

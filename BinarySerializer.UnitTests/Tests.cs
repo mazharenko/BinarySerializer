@@ -8,7 +8,7 @@ namespace BinarySerializer.UnitTests
     public class Tests
     {
         [Test]
-        public void Test1()
+        public void TestObject()
         {
             var c = new ComplexObject
             {
@@ -19,9 +19,9 @@ namespace BinarySerializer.UnitTests
                     {
                         Boolean = true,
                         BooleanField = true
-                    }
-                },
-                String = "dddfd"
+                    },
+                    Integer = -421
+                }
             };
 
             ContractSerializer.Serialize(c);
@@ -35,18 +35,14 @@ namespace BinarySerializer.UnitTests
         [Test]
         public void Test2()
         {
-            long d = unchecked((long)ulong.MaxValue);
+            Assert.IsTrue(typeof(Enum).IsAssignableFrom(typeof(A)));
 
-            var b = (ulong) d;
+        }
 
-            Assert.AreEqual(ulong.MaxValue, b);
-
-            b = unchecked((ulong) long.MinValue);
-
-            d = (long) b;
-
-            Assert.AreEqual(long.MinValue, d);
-
+        enum A
+        {
+            d,
+            b
         }
     }
 }

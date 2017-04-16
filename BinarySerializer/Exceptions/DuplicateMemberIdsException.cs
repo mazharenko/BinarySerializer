@@ -6,15 +6,12 @@ namespace BinarySerializer.Exceptions
     [Serializable]
     public class DuplicateMemberIdsException : InvalidConfigurationException
     {
-        public Type Type { get; }
-
-        public DuplicateMemberIdsException(Type type) : this(type, $"Contract {type} has duplicate member ids")
+        public DuplicateMemberIdsException(Type type) : this($"Contract {type} has duplicate member ids")
         {
         }
 
-        public DuplicateMemberIdsException(Type type, string message) : base(message)
+        public DuplicateMemberIdsException(string message) : base(message)
         {
-            Type = type;
         }
 
         protected DuplicateMemberIdsException(
