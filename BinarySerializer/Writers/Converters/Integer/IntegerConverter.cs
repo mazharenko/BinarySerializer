@@ -2,6 +2,9 @@ using System.IO;
 
 namespace BinarySerializer.Writers.Converters.Integer
 {
+    // 0001 if negative, 0000 if non-negative
+    // 4 bits - size, how many bytes is enough to store value, 0 for 0 and -1
+    // [size] bytes - value, exact is non-negative, |x|-1 if negative. obviously, skipped for 0 and -1.
     internal abstract class IntegerConverter<T> : Converter<T>
     {
         private const byte Size = 8;
