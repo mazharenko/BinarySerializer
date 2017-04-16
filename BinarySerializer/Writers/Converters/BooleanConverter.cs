@@ -2,18 +2,11 @@
 
 namespace BinarySerializer.Writers.Converters
 {
-    internal class BooleanConverter
+    internal class BooleanConverter : Converter<bool>
     {
-        private readonly bool _source;
-
-        public BooleanConverter(bool source)
+        protected override void WriteInternal(bool source, Stream stream)
         {
-            _source = source;
-        }
-
-        public void Write(Stream stream)
-        {
-            stream.WriteByte((byte) (_source ? 0xFF : 0x00));
+            stream.WriteByte((byte) (source ? 0xFF : 0x00));
         }
     }
 }

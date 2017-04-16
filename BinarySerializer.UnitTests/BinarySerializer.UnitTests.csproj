@@ -51,6 +51,13 @@
     <Compile Include="Contracts\NotInstantiable3.cs" />
     <Compile Include="Contracts\WithoutAppropriateMembers.cs" />
     <Compile Include="Contracts\Empty.cs" />
+    <Compile Include="ConverterTests\BaseConverterTestCase.cs" />
+    <Compile Include="ConverterTests\BooleanConverterTestCaseSource.cs" />
+    <Compile Include="ConverterTests\ConverterTests.cs" />
+    <Compile Include="ConverterTests\IntConverterTestCase.cs" />
+    <Compile Include="ConverterTests\IntegerConverterTestCaseSource.cs" />
+    <Compile Include="ConverterTests\LongConverterTestCase.cs" />
+    <Compile Include="ConverterTests\UniversalConverterTestCase.cs" />
     <Compile Include="Tests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

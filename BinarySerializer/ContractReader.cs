@@ -9,6 +9,13 @@ namespace BinarySerializer
 {
     internal class ContractReader
     {
+        private readonly ContractSerializationSettings _settings;
+
+        public ContractReader(ContractSerializationSettings settings)
+        {
+            _settings = settings;
+        }
+
         public void ValidateContractType(Type type)
         {
             if (type == null) throw new ArgumentNullException(nameof(type));
@@ -21,7 +28,8 @@ namespace BinarySerializer
 
         private bool IsTerminalType(Type type)
         {
-            return type.IsPrimitive || type == typeof(string);
+            // TODO: collections
+            return _settings.Converters.Contains(type);
         }
 
         public ICollection<ContractMemberAdapter> CollectMembers(Type type, object contract)
