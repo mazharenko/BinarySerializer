@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using BinarySerializer.Converters;
 using BinarySerializer.Converters.Integer;
+using BinarySerializer.Stream;
 
 namespace BinarySerializer
 {
@@ -16,10 +17,13 @@ namespace BinarySerializer
                 new UIntConverter(),
                 new ULongConverter()
             });
-            WriterFactory = new ContractSerializationWriterFactory();
+
+            StreamWriter = new SerializationStreamWriter();
+            EntryProviderRegistry = new StreamEntriesProviderRegistry();
         }
 
         public ConvertersCollection Converters { get; }
-        public IContractSerializationWriterFactory WriterFactory { get; set; }
+        public ISerializationStreamWriter StreamWriter { get; set; }
+        public IStreamEntriesProviderRegistry EntryProviderRegistry { get; set; }
     }
 }

@@ -33,6 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
@@ -45,8 +46,9 @@
     <Compile Include="ContractPropertyAdapter.cs" />
     <Compile Include="ContractReader.cs" />
     <Compile Include="ContractSerializationWriterFactory.cs" />
+    <Compile Include="EnumerableExtensions.cs" />
     <Compile Include="Exceptions\InvalidMemberException.cs" />
-    <Compile Include="IContractSerializationWriterFactory.cs" />
+    <Compile Include="IStreamEntriesProviderRegistry.cs" />
     <Compile Include="SerializationSettings.cs" />
     <Compile Include="ContractSerializer.cs" />
     <Compile Include="Converters\BooleanConverter.cs" />
@@ -65,13 +67,15 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ConvertersCollection.cs" />
     <Compile Include="SerializationContext.cs" />
-    <Compile Include="Writers\ContractWriter.cs" />
-    <Compile Include="Writers\ConvertationWriter.cs" />
-    <Compile Include="Writers\ISerializationWriter.cs" />
-    <Compile Include="Writers\Providers\ContractWriterProvider.cs" />
-    <Compile Include="Writers\Providers\ConvertationWriterProvider.cs" />
-    <Compile Include="Writers\Providers\IContractWriterProvider.cs" />
-    <Compile Include="Writers\SerializationWriterWithHeader.cs" />
+    <Compile Include="Stream\Entries\ConvertationEntry.cs" />
+    <Compile Include="Stream\Entries\ISerializationStreamEntry.cs" />
+    <Compile Include="Stream\Entries\MemberEndingEntry.cs" />
+    <Compile Include="Stream\Entries\MemberHeaderEntry.cs" />
+    <Compile Include="Stream\ISerializationStreamWriter.cs" />
+    <Compile Include="Stream\Providing\ContractStreamEntriesProvider.cs" />
+    <Compile Include="Stream\Providing\ConvertationMemberStreamEntriesProvider.cs" />
+    <Compile Include="Stream\Providing\IContractStreamEntriesProvider.cs" />
+    <Compile Include="Stream\SerializationStreamWriter.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

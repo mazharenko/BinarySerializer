@@ -1,25 +1,26 @@
 using System.Collections.Generic;
 using System.Linq;
 using BinarySerializer.Exceptions;
-using BinarySerializer.Writers;
-using BinarySerializer.Writers.Providers;
+using BinarySerializer.Stream.Entries;
+using BinarySerializer.Stream.Providing;
 
 namespace BinarySerializer
 {
-    internal class ContractSerializationWriterFactory : IContractSerializationWriterFactory
+    internal class StreamEntriesProviderRegistry : IStreamEntriesProviderRegistry
     {
-        protected readonly List<IContractWriterProvider> ProviderSequence = new List<IContractWriterProvider>
+        protected readonly List<IContractStreamEntriesProvider> Providers = new List<IContractStreamEntriesProvider>
         {
-            new ConvertationWriterProvider(),
-            new ContractWriterProvider()
+            new ConvertingMemberStreamEntriesProvider(),
+            new ContractStreamEntriesProvider()
         };
 
-        public ISerializationWriter CreateWriter(ContractMemberAdapter memberAdapter, SerializationContext serializationContext)
+        public IContractStreamEntriesProvider GetProvider(ContractMemberAdapter memberAdapter,
+            SerializationContext serializationContext)
         {
-            var provider = ProviderSequence.FirstOrDefault(s => s.GetIsApplicable(memberAdapter, serializationContext));
+            var provider = Providers.FirstOrDefault(s => s.GetIsApplicable(memberAdapter, serializationContext));
             if (provider == null)
                 throw new InvalidMemberException(memberAdapter);
-            return provider.Provide();
+            return provider;
         }
     }
 }

@@ -1,10 +1,8 @@
-﻿using System.IO;
-
-namespace BinarySerializer.Converters.Integer
+﻿namespace BinarySerializer.Converters.Integer
 {
     internal class LongConverter : SignedIntegerConverter<long>
     {
-        protected override void WriteInternal(long source, Stream stream)
+        protected override void WriteInternal(long source, System.IO.Stream stream)
         {
             Write(source, stream);
         }

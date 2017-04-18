@@ -1,6 +1,5 @@
 using System;
 using System.Reflection;
-using BinarySerializer.Attributes;
 
 namespace BinarySerializer
 {

@@ -3,8 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using BinarySerializer.Converters;
-using BinarySerializer.Exceptions;
-using BinarySerializer.Writers;
 
 namespace BinarySerializer
 {
@@ -74,6 +72,7 @@ namespace BinarySerializer
 
         public int Count => _collectionImplementation.Count;
 
+        // todo: !readonly
         public bool IsReadOnly => true;
     }
 }

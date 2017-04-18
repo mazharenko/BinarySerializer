@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
-using BinarySerializer.Writers;
+using BinarySerializer.Converters;
+using BinarySerializer.Stream.Entries;
+using BinarySerializer.Stream.Providing;
 
 namespace BinarySerializer
 {
@@ -8,18 +11,28 @@ namespace BinarySerializer
 
     public class SerializationContext
     {
-        public SerializationContext(SerializationSettings settings, Stream destinationStream)
+        public SerializationContext(SerializationSettings settings, System.IO.Stream destinationStream)
         {
             Settings = settings;
             DestinationStream = destinationStream;
         }
 
         public SerializationSettings Settings { get; }
-        public Stream DestinationStream { get; }
+        public System.IO.Stream DestinationStream { get; }
 
-        public ISerializationWriter ProvideWriter(ContractMemberAdapter memberAdapter)
+        public IContractStreamEntriesProvider GetStreamEntriesProvider(ContractMemberAdapter memberAdapter)
         {
-            return Settings.WriterFactory.CreateWriter(memberAdapter, this);
+            return Settings.EntryProviderRegistry.GetProvider(memberAdapter, this);
+        }
+
+        public void WriteStreamEntry(ISerializationStreamEntry entry)
+        {
+            Settings.StreamWriter.Write(entry, this);
+        }
+
+        public IConverter FindConverter(Type type)
+        {
+            return Settings.Converters.Find(type);
         }
     }
 }

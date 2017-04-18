@@ -1,5 +1,3 @@
-using System.IO;
-
 namespace BinarySerializer.Converters.Integer
 {
     // if non-negative and 7 bits is enough
@@ -15,7 +13,7 @@ namespace BinarySerializer.Converters.Integer
     {
         private const byte Size = 8;
 
-        protected void Write(ulong source, bool negative, Stream stream)
+        protected void Write(ulong source, bool negative, System.IO.Stream stream)
         {
             if (!negative && source >> 7 == 0)
                 WriteShort(source, stream);
@@ -23,12 +21,12 @@ namespace BinarySerializer.Converters.Integer
                 WriteLong(source, negative, stream);
         }
 
-        private static void WriteShort(ulong source, Stream stream)
+        private static void WriteShort(ulong source, System.IO.Stream stream)
         {
             stream.WriteByte((byte) (0x80 + source));
         }
 
-        private static void WriteLong(ulong source, bool negative, Stream stream)
+        private static void WriteLong(ulong source, bool negative, System.IO.Stream stream)
         {
             var offset = Size;
             var sizeFixed = false;
