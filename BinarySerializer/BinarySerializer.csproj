@@ -45,7 +45,7 @@
     <Compile Include="ContractMemberAdapter.cs" />
     <Compile Include="ContractPropertyAdapter.cs" />
     <Compile Include="ContractReader.cs" />
-    <Compile Include="ContractSerializationWriterFactory.cs" />
+    <Compile Include="StreamEntriesProviderRegistry.cs" />
     <Compile Include="EnumerableExtensions.cs" />
     <Compile Include="Exceptions\InvalidMemberException.cs" />
     <Compile Include="IStreamEntriesProviderRegistry.cs" />
@@ -73,7 +73,7 @@
     <Compile Include="Stream\Entries\MemberHeaderEntry.cs" />
     <Compile Include="Stream\ISerializationStreamWriter.cs" />
     <Compile Include="Stream\Providing\ContractStreamEntriesProvider.cs" />
-    <Compile Include="Stream\Providing\ConvertationMemberStreamEntriesProvider.cs" />
+    <Compile Include="Stream\Providing\ConvertingMemberStreamEntriesProvider.cs" />
     <Compile Include="Stream\Providing\IContractStreamEntriesProvider.cs" />
     <Compile Include="Stream\SerializationStreamWriter.cs" />
   </ItemGroup>

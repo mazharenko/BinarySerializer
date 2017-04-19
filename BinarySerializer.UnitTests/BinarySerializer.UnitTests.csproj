@@ -42,13 +42,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Contracts\Class1.cs" />
+    <Compile Include="ComplexContractTests.cs" />
+    <Compile Include="Contracts\BooleanObject.cs" />
+    <Compile Include="Contracts\ComplexObject.cs" />
     <Compile Include="Contracts\Cyclic.cs" />
     <Compile Include="Contracts\Generic.cs" />
     <Compile Include="Contracts\INotInstantiable.cs" />
     <Compile Include="Contracts\NotInstantiable.cs" />
     <Compile Include="Contracts\NotInstantiable2.cs" />
     <Compile Include="Contracts\NotInstantiable3.cs" />
+    <Compile Include="Contracts\SubComplexObject.cs" />
     <Compile Include="Contracts\WithoutAppropriateMembers.cs" />
     <Compile Include="Contracts\Empty.cs" />
     <Compile Include="ConverterTests\BaseConverterTestCase.cs" />
