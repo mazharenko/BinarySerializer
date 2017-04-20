@@ -7,23 +7,23 @@ namespace BinarySerializer
     {
         protected FieldInfo Info { get; }
 
-        public ContractFieldAdapter(FieldInfo info, int id, object contract)
+        public ContractFieldAdapter(FieldInfo info, int id, ObjectAdapter contract)
             : base(id, contract)
         {
             Info = info;
         }
 
         public override string Name => Info.Name;
-        public override Type Type => Info.FieldType; //TODO: ????
+        public override Type Type => Info.FieldType;
 
         public override object GetValue()
         {
-            return Info.GetValue(Contract);
+            return Info.GetValue(ContractAdapter.GetValue());
         }
 
         public override void SetValue(object value)
         {
-            Info.SetValue(Contract, value);
+            Info.SetValue(ContractAdapter.GetValue(), value);
         }
     }
 }

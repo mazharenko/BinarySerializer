@@ -4,7 +4,12 @@
     {
         protected override void WriteInternal(long source, System.IO.Stream stream)
         {
-            Write(source, stream);
+            WriteLong(source, stream);
+        }
+
+        protected override long ReadInternal(System.IO.Stream stream)
+        {
+            return ReadLong(stream);
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 
 namespace BinarySerializer
 {
@@ -26,10 +27,37 @@ namespace BinarySerializer
             if (contract == null) throw new ArgumentNullException(nameof(contract));
             if (destination == null) throw new ArgumentNullException(nameof(destination));
             var context = new SerializationContext(settings, destination);
-            new ContractReader(context).CollectMembers(contract.GetType(), contract)
-                .SelectMany(contractMemberAdapter => context.GetStreamEntriesProvider(contractMemberAdapter)
-                    .Provide(contractMemberAdapter, context))
+            new ContractReader().CollectMembers(contract.GetType(), contract)
+                .SelectMany(
+                    contractMemberAdapter => context.GetStreamEntriesProvider(contractMemberAdapter)
+                        .Provide(contractMemberAdapter, context))
                 .ForEach(context.WriteStreamEntry);
+        }
+
+        public static T Deserialize<T>(byte[] source)
+        {
+            using (var stream = new MemoryStream(source))
+            {
+                return Deserialize<T>(stream);
+            }
+        }
+
+        public static T Deserialize<T>(System.IO.Stream source)
+        {
+            return Deserialize<T>(source, new DeserializationSettings());
+        }
+
+        public static T Deserialize<T>(System.IO.Stream source, DeserializationSettings settings)
+        {
+            if (source == null) throw new ArgumentNullException(nameof(source));
+            if (settings == null) throw new ArgumentNullException(nameof(settings));
+            var context = new DeserializationContext(settings, source);
+
+            var objectAdapter = new ObjectAdapter(typeof(T));
+            var members = new ContractReader().CollectMembers(objectAdapter);
+
+            settings.StreamReader.Read(objectAdapter, members, context);
+            return (T)objectAdapter.GetValue();
         }
     }
 }

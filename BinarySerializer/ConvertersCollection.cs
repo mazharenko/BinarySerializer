@@ -30,7 +30,7 @@ namespace BinarySerializer
         public IConverter Find(Type @for)
         {
             var currentType = @for;
-            while (currentType != null)
+            while (currentType != null && currentType != typeof(object))
             {
                 IConverter converter;
                 if (_collectionImplementation.TryGetValue(currentType, out converter))

@@ -32,7 +32,7 @@ namespace BinarySerializer.UnitTests.ConverterTests
         protected void Test<TConverter>(object source, byte[] expected) where TConverter : IConverter, new()
         {
             var stream = new MemoryStream();
-            new TConverter().Convert(source, stream);
+            new TConverter().Write(source, stream);
             CollectionAssert.AreEqual(expected, stream.ToArray());
         }
     }

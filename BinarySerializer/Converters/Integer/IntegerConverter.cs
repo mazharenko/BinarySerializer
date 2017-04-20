@@ -1,3 +1,5 @@
+using System.Linq;
+
 namespace BinarySerializer.Converters.Integer
 {
     // if non-negative and 7 bits is enough
@@ -8,7 +10,7 @@ namespace BinarySerializer.Converters.Integer
     //
     // 0001 if negative, 0000 if non-negative
     // 4 bits - size, how many bytes is enough to store value, 0 for -1
-    // [size] bytes - value, exact is non-negative, |x|-1 if negative. obviously, skipped for -1.
+    // [size] bytes - value, exact if non-negative, |x|-1 if negative. obviously, skipped for -1.
     internal abstract class IntegerConverter<T> : Converter<T>
     {
         private const byte Size = 8;
@@ -51,6 +53,28 @@ namespace BinarySerializer.Converters.Integer
             {
                 stream.WriteByte((byte) ((negative ? 1 : 0) << 4));
             }
+        }
+
+        // if strats from 1
+        // non-negative and 7 following bits were enough
+        //
+        // ELSE
+        //
+        // negative if 0001, non-negative if 0000
+        // 4 bits - size, how many bytes was enough to store value, 0 for -1
+        // [size] bytes - value, exact if non-negative, |x|-1 if negative. obviously, skipped for -1.
+        protected ulong Read(System.IO.Stream stream, out bool negative)
+        {
+            negative = false;
+            var firstByte = ReadBytes(stream, 1).Single();
+            if ((firstByte & 0x80) != 0)
+                return (ulong) (firstByte & 0x7F);
+
+            negative = (firstByte & 0xF0) != 0;
+            var size = firstByte & 0x0F;
+
+            var leftBytes = ReadBytes(stream, size);
+            return leftBytes.Aggregate(0UL, (res, b) => res << 8 | b);
         }
     }
 }

@@ -7,7 +7,7 @@ namespace BinarySerializer
     {
         protected PropertyInfo Info { get; }
 
-        public ContractPropertyAdapter(PropertyInfo info, int id, object contract)
+        public ContractPropertyAdapter(PropertyInfo info, int id, ObjectAdapter contract)
             : base(id, contract)
         {
             if (!info.CanRead || !info.CanWrite)
@@ -16,16 +16,16 @@ namespace BinarySerializer
         }
 
         public override string Name => Info.Name;
-        public override Type Type => Info.PropertyType; //TODO: ????
+        public override Type Type => Info.PropertyType;
 
         public override object GetValue()
         {
-            return Info.GetValue(Contract);
+            return Info.GetValue(ContractAdapter.GetValue());
         }
 
         public override void SetValue(object value)
         {
-            Info.SetValue(Contract, value);
+            Info.SetValue(ContractAdapter.GetValue(), value);
         }
     }
 }

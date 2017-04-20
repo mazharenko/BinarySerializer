@@ -1,29 +1,25 @@
-﻿using System.Collections.Generic;
-using BinarySerializer.Converters;
-using BinarySerializer.Converters.Integer;
-using BinarySerializer.Stream;
+﻿using BinarySerializer.Stream;
 
 namespace BinarySerializer
 {
-    public class SerializationSettings
+    public class SerializationSettings : SerializationSettingsBase
     {
         public SerializationSettings()
         {
-            Converters = new ConvertersCollection(new List<IConverter>
-            {
-                new BooleanConverter(),
-                new IntConverter(),
-                new LongConverter(),
-                new UIntConverter(),
-                new ULongConverter()
-            });
-
             StreamWriter = new SerializationStreamWriter();
             EntryProviderRegistry = new StreamEntriesProviderRegistry();
         }
 
-        public ConvertersCollection Converters { get; }
         public ISerializationStreamWriter StreamWriter { get; set; }
         public IStreamEntriesProviderRegistry EntryProviderRegistry { get; set; }
+    }
+
+    public class DeserializationSettings : SerializationSettingsBase
+    {
+        public DeserializationSettings()
+        {
+            StreamReader = new DeserializationStreamReader();
+        }
+        public IDeserializationStreamReader StreamReader { get; set; }
     }
 }

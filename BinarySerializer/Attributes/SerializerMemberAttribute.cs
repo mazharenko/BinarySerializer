@@ -1,4 +1,5 @@
 ﻿using System;
+using BinarySerializer.Stream;
 
 namespace BinarySerializer.Attributes
 {
@@ -9,6 +10,8 @@ namespace BinarySerializer.Attributes
 
         public SerializerMemberAttribute(int id)
         {
+            if (id <= 0 || id == Constants.MemberEndMark)
+                throw new ArgumentOutOfRangeException(nameof(id));
             Id = id;
         }
     }

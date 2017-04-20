@@ -11,8 +11,7 @@ namespace BinarySerializer.UnitTests
         [Test]
         public void Test2()
         {
-            Assert.IsTrue(typeof(Enum).IsAssignableFrom(typeof(A)));
-
+            var d = ContractSerializer.Serialize(45);
         }
 
         enum A

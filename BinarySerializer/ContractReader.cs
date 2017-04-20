@@ -9,13 +9,7 @@ namespace BinarySerializer
 {
     internal class ContractReader
     {
-        private readonly SerializationContext _context;
-
-        public ContractReader(SerializationContext settings)
-        {
-            _context = settings;
-        }
-// todo что теперь делать с этой проверкой
+        // todo что теперь делать с этой проверкой
         public void ValidateContractType(Type type)
         {
             if (type == null) throw new ArgumentNullException(nameof(type));
@@ -35,32 +29,41 @@ namespace BinarySerializer
 
         public ICollection<ContractMemberAdapter> CollectMembers(Type type, object contract)
         {
-            if (contract == null) throw new ArgumentNullException(nameof(contract));
+            if (contract == null) return new List<ContractMemberAdapter>();
             if (!type.IsInstanceOfType(contract))
                 throw new ArgumentException();
 
-            ValidateContractType(type);
+            return CollectMembers(new ObjectAdapter(contract));
+        }
+
+        public ICollection<ContractMemberAdapter> CollectMembers(ObjectAdapter contractAdapter)
+        {
+            if (contractAdapter == null) return new List<ContractMemberAdapter>();
+
+            ValidateContractType(contractAdapter.Type);
 
             var visitedAttributes = new List<int>();
 
-            var properties = from prop in type.GetProperties(BindingFlags.Public | BindingFlags.Instance)
-                let id = GetAndCheckMemberId(type, prop, visitedAttributes)
+            var properties = from prop in contractAdapter.Type.GetProperties(BindingFlags.Public | BindingFlags.Instance)
+                let id = GetAndCheckMemberId(contractAdapter.Type, prop, visitedAttributes)
                 where id != null
-                select new ContractPropertyAdapter(prop, id.Value, contract);
+                select new ContractPropertyAdapter(prop, id.Value, contractAdapter);
 
-            var fields = from field in type.GetFields(BindingFlags.Public | BindingFlags.Instance)
-                let id = GetAndCheckMemberId(type, field, visitedAttributes)
+            var fields = from field in contractAdapter.Type.GetFields(BindingFlags.Public | BindingFlags.Instance)
+                let id = GetAndCheckMemberId(contractAdapter.Type, field, visitedAttributes)
                 where id != null
-                select new ContractFieldAdapter(field, id.Value, contract);
+                select new ContractFieldAdapter(field, id.Value, contractAdapter);
 
             var members = properties.Cast<ContractMemberAdapter>().Concat(fields).ToList();
             members.ForEach(a =>
             {
                 if (!IsTerminalType(a.Type))
-                    a.Children = CollectMembers(a.Type, a.GetValue());
+                    CollectMembers(new ObjectDelegatingAdapter(a)).ForEach(a.Children.Add);
             });
 
-            return members;
+            return members.Any()
+                ? members
+                : new ContractSingleObjectAdapter(0, contractAdapter).AsEnumerable<ContractMemberAdapter>().ToList();
         }
 
         private static int? GetAndCheckMemberId(Type type, MemberInfo prop, ICollection<int> visitedAttributes)

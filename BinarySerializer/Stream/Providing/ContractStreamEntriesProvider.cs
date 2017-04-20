@@ -22,4 +22,5 @@ namespace BinarySerializer.Stream.Providing
                 .Concat(new MemberEndingEntry().AsEnumerable());
         }
     }
+
 }

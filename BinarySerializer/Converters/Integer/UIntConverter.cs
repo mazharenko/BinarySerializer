@@ -4,7 +4,12 @@ namespace BinarySerializer.Converters.Integer
     {
         protected override void WriteInternal(uint source, System.IO.Stream stream)
         {
-            Write(source, stream);
+            WriteULong(source, stream);
+        }
+
+        protected override uint ReadInternal(System.IO.Stream stream)
+        {
+            return (uint) ReadULong(stream);
         }
     }
 }

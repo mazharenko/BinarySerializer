@@ -6,6 +6,7 @@ namespace BinarySerializer.Converters
     public interface IConverter
     {
         Type Type { get; }
-        void Convert(object source, System.IO.Stream stream);
+        void Write(object source, System.IO.Stream stream);
+        object Read(System.IO.Stream stream);
     }
 }

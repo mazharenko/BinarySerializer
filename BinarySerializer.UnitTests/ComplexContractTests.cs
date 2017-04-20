@@ -25,5 +25,13 @@ namespace BinarySerializer.UnitTests
                 }
             };
         }
+
+        [Test]
+        public void Test1()
+        {
+            var dd = ContractSerializer.Serialize(_complexObject);
+
+            var o = ContractSerializer.Deserialize<ComplexObject>(dd);
+        }
     }
 }

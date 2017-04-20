@@ -45,6 +45,10 @@
     <Compile Include="ContractMemberAdapter.cs" />
     <Compile Include="ContractPropertyAdapter.cs" />
     <Compile Include="ContractReader.cs" />
+    <Compile Include="DeserializationContext.cs" />
+    <Compile Include="Exceptions\StreamReaderException.cs" />
+    <Compile Include="SerializationContextBase.cs" />
+    <Compile Include="SerializationSettingsBase.cs" />
     <Compile Include="StreamEntriesProviderRegistry.cs" />
     <Compile Include="EnumerableExtensions.cs" />
     <Compile Include="Exceptions\InvalidMemberException.cs" />
@@ -76,6 +80,7 @@
     <Compile Include="Stream\Providing\ConvertingMemberStreamEntriesProvider.cs" />
     <Compile Include="Stream\Providing\IContractStreamEntriesProvider.cs" />
     <Compile Include="Stream\SerializationStreamWriter.cs" />
+    <Compile Include="TypeExtensions.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
