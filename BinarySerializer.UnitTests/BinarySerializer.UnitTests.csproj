@@ -33,6 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Rhino.Mocks, Version=3.6.0.0, Culture=neutral, PublicKeyToken=0b3305902db7183f">
+      <HintPath>..\packages\RhinoMocks.3.6.1\lib\net\Rhino.Mocks.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
@@ -62,6 +65,9 @@
     <Compile Include="ConverterTests\Cases\UniversalConverterTestCase.cs" />
     <Compile Include="ConverterTests\ConverterReadTests.cs" />
     <Compile Include="ConverterTests\ConverterWriteTests.cs" />
+    <Compile Include="EmptyObjectsTests.cs" />
+    <Compile Include="GenericTests.cs" />
+    <Compile Include="SerializationEntriesTests.cs" />
     <Compile Include="Tests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -70,6 +76,9 @@
       <Project>{6B484A5E-988E-4924-98BB-522B39B595F2}</Project>
       <Name>BinarySerializer</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

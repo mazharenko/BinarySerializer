@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
-using System.Runtime.Remoting.Messaging;
 using BinarySerializer.Adapters;
 using BinarySerializer.Deserialization;
 using BinarySerializer.Extensions;
@@ -21,12 +20,12 @@ namespace BinarySerializer
             }
         }
 
-        public static void Serialize(object contract, System.IO.Stream destination)
+        public static void Serialize(object contract, Stream destination)
         {
             Serialize(contract, destination, new SerializationSettings());
         }
 
-        public static void Serialize(object contract, System.IO.Stream destination, SerializationSettings settings)
+        public static void Serialize(object contract, Stream destination, SerializationSettings settings)
         {
             if (contract == null) throw new ArgumentNullException(nameof(contract));
             if (destination == null) throw new ArgumentNullException(nameof(destination));
@@ -46,12 +45,12 @@ namespace BinarySerializer
             }
         }
 
-        public static T Deserialize<T>(System.IO.Stream source)
+        public static T Deserialize<T>(Stream source)
         {
             return Deserialize<T>(source, new DeserializationSettings());
         }
 
-        public static T Deserialize<T>(System.IO.Stream source, DeserializationSettings settings)
+        public static T Deserialize<T>(Stream source, DeserializationSettings settings)
         {
             if (source == null) throw new ArgumentNullException(nameof(source));
             if (settings == null) throw new ArgumentNullException(nameof(settings));
