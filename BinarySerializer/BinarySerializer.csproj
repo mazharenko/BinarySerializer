@@ -66,6 +66,7 @@
     <Compile Include="Serialization\Providing\ContractStreamEntriesProvider.cs" />
     <Compile Include="Serialization\Providing\ConvertingMemberStreamEntriesProvider.cs" />
     <Compile Include="Serialization\Providing\IContractStreamEntriesProvider.cs" />
+    <Compile Include="Serialization\Providing\SingleObjectStreamEntitiesProvider.cs" />
     <Compile Include="Serialization\SerializationContext.cs" />
     <Compile Include="Serialization\SerializationSettings.cs" />
     <Compile Include="Serialization\Stream\ISerializationStreamWriter.cs" />

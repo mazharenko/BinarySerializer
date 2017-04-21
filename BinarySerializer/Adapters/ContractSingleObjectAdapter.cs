@@ -11,7 +11,7 @@ namespace BinarySerializer.Adapters
         }
 
         public override string Name => "root";
-        public override Type Type => ContractAdapter.GetType();
+        public override Type Type => ContractAdapter.Type;
 
         public override object GetValue()
         {

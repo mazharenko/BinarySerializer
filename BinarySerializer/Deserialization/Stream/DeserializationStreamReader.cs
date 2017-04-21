@@ -24,11 +24,15 @@ namespace BinarySerializer.Deserialization.Stream
         private void ReadSingle(ContractSingleObjectAdapter singleObject, DeserializationContext context)
         {
             var converter = context.FindConverter(singleObject.Type);
-            if (converter == null)
+            if (converter != null)
+                singleObject.SetValue(converter.Read(context.Stream));
+            else if (ContractIsCreatable(singleObject.Type))
+                singleObject.SetValue(CreateContract(singleObject.Type));
+            else
                 throw new UnknownTypeException(singleObject.Type);
-            singleObject.SetValue(converter.Read(context.Stream));
         }
 
+        // TODO: refactor!!
         private void ReadRoot(ObjectAdapter objectAdapter, ICollection<ContractMemberAdapter> members, DeserializationContext context)
         {
             objectAdapter.SetValue(CreateContract(objectAdapter.Type));
@@ -77,12 +81,17 @@ namespace BinarySerializer.Deserialization.Stream
             }
         }
 
-        private object CreateContract(Type type)
+        private static object CreateContract(Type type)
         {
-            if (type.GetConstructor(new Type[0]) == null)
+            if (!ContractIsCreatable(type))
                 throw new InvalidConfigurationException($"The specified type can't be either instantiated or converted - {type}");
 
             return Activator.CreateInstance(type);
+        }
+
+        private static bool ContractIsCreatable(Type type)
+        {
+            return type.GetConstructor(new Type[0]) != null;
         }
     }
 }
