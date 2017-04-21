@@ -1,5 +1,4 @@
 ﻿using System;
-using BinarySerializer.Stream;
 
 namespace BinarySerializer.Attributes
 {

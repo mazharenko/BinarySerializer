@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.Serialization;
+using BinarySerializer.Adapters;
 
 namespace BinarySerializer.Exceptions
 {

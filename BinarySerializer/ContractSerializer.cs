@@ -2,6 +2,10 @@
 using System.IO;
 using System.Linq;
 using System.Runtime.Remoting.Messaging;
+using BinarySerializer.Adapters;
+using BinarySerializer.Deserialization;
+using BinarySerializer.Extensions;
+using BinarySerializer.Serialization;
 
 namespace BinarySerializer
 {

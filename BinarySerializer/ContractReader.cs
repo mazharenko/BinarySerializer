@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using BinarySerializer.Adapters;
 using BinarySerializer.Attributes;
 using BinarySerializer.Exceptions;
+using BinarySerializer.Extensions;
 
 namespace BinarySerializer
 {

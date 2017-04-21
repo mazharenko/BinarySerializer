@@ -54,13 +54,14 @@
     <Compile Include="Contracts\SubComplexObject.cs" />
     <Compile Include="Contracts\WithoutAppropriateMembers.cs" />
     <Compile Include="Contracts\Empty.cs" />
-    <Compile Include="ConverterTests\BaseConverterTestCase.cs" />
-    <Compile Include="ConverterTests\BooleanConverterTestCaseSource.cs" />
-    <Compile Include="ConverterTests\ConverterTests.cs" />
-    <Compile Include="ConverterTests\IntConverterTestCase.cs" />
-    <Compile Include="ConverterTests\IntegerConverterTestCaseSource.cs" />
-    <Compile Include="ConverterTests\LongConverterTestCase.cs" />
-    <Compile Include="ConverterTests\UniversalConverterTestCase.cs" />
+    <Compile Include="ConverterTests\Cases\BaseConverterTestCase.cs" />
+    <Compile Include="ConverterTests\Cases\BooleanConverterTestCaseSource.cs" />
+    <Compile Include="ConverterTests\Cases\IntConverterTestCase.cs" />
+    <Compile Include="ConverterTests\Cases\IntegerConverterTestCaseSource.cs" />
+    <Compile Include="ConverterTests\Cases\LongConverterTestCase.cs" />
+    <Compile Include="ConverterTests\Cases\UniversalConverterTestCase.cs" />
+    <Compile Include="ConverterTests\ConverterReadTests.cs" />
+    <Compile Include="ConverterTests\ConverterWriteTests.cs" />
     <Compile Include="Tests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
