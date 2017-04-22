@@ -59,20 +59,7 @@ namespace BinarySerializer.Deserialization.Stream
                     out streamEnd);
                 if (streamEnd)
                     break;
-                var member = members.FirstOrDefault(m => m.Id == (int)idObject);
-                if (member == null)
-                    throw new StreamReaderException("An unexpected member id appeared in the input stream");
-
-                var converter = context.FindConverter(member.Type);
-                if (converter == null)
-                {
-                    member.SetValue(CreateContract(member.Type));
-                    ReadMultipleSubObject(member.Children, context);
-                }
-                else
-                {
-                    member.SetValue(ExtractValueFromReadResult(converter.Read(context.Stream)));
-                }
+                ReadMultipleMemberValue((int)idObject, members, context);
             }
         }
 
@@ -83,21 +70,25 @@ namespace BinarySerializer.Deserialization.Stream
                 var id = (int)ExtractValueFromReadResult(context.FindConverter(typeof(int)).Read(context.Stream));
                 if (id == Constants.MemberEndMark)
                     break;
+                ReadMultipleMemberValue(id, members, context);
+            }
+        }
 
-                var member = members.FirstOrDefault(m => m.Id == id);
-                if (member == null)
-                    throw new StreamReaderException("An unexpected member id appeared in the input stream");
+        private void ReadMultipleMemberValue(int id, IEnumerable<ContractMemberAdapter> members, DeserializationContext context)
+        {
+            var member = members.FirstOrDefault(m => m.Id == id);
+            if (member == null)
+                throw new StreamReaderException("An unexpected member id appeared in the input stream");
 
-                var converter = context.FindConverter(member.Type);
-                if (converter == null)
-                {
-                    member.SetValue(CreateContract(member.Type));
-                    ReadMultipleSubObject(member.Children, context);
-                }
-                else
-                {
-                    member.SetValue(ExtractValueFromReadResult(converter.Read(context.Stream)));
-                }
+            var converter = context.FindConverter(member.Type);
+            if (converter == null)
+            {
+                member.SetValue(CreateContract(member.Type));
+                ReadMultipleSubObject(member.Children, context);
+            }
+            else
+            {
+                member.SetValue(ExtractValueFromReadResult(converter.Read(context.Stream)));
             }
         }
 
