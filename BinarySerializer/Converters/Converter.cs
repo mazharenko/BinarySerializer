@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Runtime.Serialization;
 using BinarySerializer.Exceptions;
 
 namespace BinarySerializer.Converters
@@ -10,6 +11,8 @@ namespace BinarySerializer.Converters
 
         public void Write(object source, Stream stream)
         {
+            if (source == null)
+                throw new ArgumentNullException(nameof(source));
             if (!(source is T))
                 throw new ArgumentException($"Object of type {Type} was expected");
             WriteInternal((T) source, stream);
@@ -56,6 +59,5 @@ namespace BinarySerializer.Converters
             if (bytesRead != bytesExected)
                 throw new UnexpectedStreamEndException();
         }
-
     }
 }

@@ -11,15 +11,19 @@ namespace BinarySerializer.UnitTests.ConverterTests
     {
         [Test]
         [TestCaseSource(typeof(BooleanConverterTestCaseSource))]
+        [TestCaseSource(typeof(StringConverterTestCaseSource))]
+        [TestCaseSource(typeof(StringConverterTestCaseSource), nameof(StringConverterTestCaseSource.GetWriteCases))]
         [TestCaseSource(typeof(IntegerConverterTestCaseSource), nameof(IntegerConverterTestCaseSource.GetLongCases))]
         [TestCaseSource(typeof(IntegerConverterTestCaseSource), nameof(IntegerConverterTestCaseSource.GetInt32Cases))]
         [TestCaseSource(typeof(IntegerConverterTestCaseSource), nameof(IntegerConverterTestCaseSource.GetByteCases))]
         [TestCaseSource(typeof(IntegerConverterTestCaseSource), nameof(IntegerConverterTestCaseSource.GetSByteCases))]
         public void TestConvertersWrite(object source, byte[] expected, Type type)
         {
-            var stream = new MemoryStream();
-            ((IConverter)Activator.CreateInstance(type)).Write(source, stream);
-            CollectionAssert.AreEqual(expected, stream.ToArray());
+            using (var stream = new MemoryStream())
+            {
+                ((IConverter) Activator.CreateInstance(type)).Write(source, stream);
+                CollectionAssert.AreEqual(expected, stream.ToArray());
+            }
         }
     }
 }

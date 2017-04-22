@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BinarySerializer.Converters
+namespace BinarySerializer.Exceptions
 {
     internal class StreamEndReachedException : Exception
     {

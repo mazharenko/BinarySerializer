@@ -53,6 +53,7 @@
     <Compile Include="Contracts\Empty.cs" />
     <Compile Include="ConverterTests\CaseSources\BooleanConverterTestCaseSource.cs" />
     <Compile Include="ConverterTests\CaseSources\IntegerConverterTestCaseSource.cs" />
+    <Compile Include="ConverterTests\CaseSources\StringConverterTestCaseSource.cs" />
     <Compile Include="ConverterTests\Cases\BaseConverterTestCase.cs" />
     <Compile Include="ConverterTests\Cases\ByteConverterTestCase.cs" />
     <Compile Include="ConverterTests\Cases\IntConverterTestCase.cs" />
@@ -61,6 +62,7 @@
     <Compile Include="ConverterTests\Cases\UniversalConverterTestCase.cs" />
     <Compile Include="ConverterTests\ConverterReadTests.cs" />
     <Compile Include="ConverterTests\ConverterWriteTests.cs" />
+    <Compile Include="ConverterTests\StringConverterTests.cs" />
     <Compile Include="EmptyObjectsTests.cs" />
     <Compile Include="EmptyTestCaseSource.cs" />
     <Compile Include="GenericTests.cs" />

@@ -55,11 +55,12 @@
     <Compile Include="Converters\ConverterReadResult.cs" />
     <Compile Include="Converters\ConvertersCollection.cs" />
     <Compile Include="Converters\SByteConverter.cs" />
-    <Compile Include="Converters\StreamEndReachedException.cs" />
+    <Compile Include="Converters\StringConverter.cs" />
     <Compile Include="Deserialization\DeserializationContext.cs" />
     <Compile Include="Deserialization\DeserializationSettings.cs" />
     <Compile Include="Deserialization\Stream\DeserializationStreamReader.cs" />
     <Compile Include="Deserialization\Stream\IDeserializationStreamReader.cs" />
+    <Compile Include="Exceptions\StreamEndReachedException.cs" />
     <Compile Include="Exceptions\StreamReaderException.cs" />
     <Compile Include="Exceptions\UnexpectedStreamEndException.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />

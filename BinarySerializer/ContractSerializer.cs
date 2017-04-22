@@ -72,13 +72,12 @@ namespace BinarySerializer
 
         public static T Deserialize<T>(Stream source)
         {
-            return (T)Deserialize(typeof(T), source);
+            return (T) Deserialize(typeof(T), source);
         }
 
         public static T Deserialize<T>(Stream source, DeserializationSettings settings)
         {
-
-            return (T)Deserialize(typeof(T), source, settings);
+            return (T) Deserialize(typeof(T), source, settings);
         }
     }
 }
