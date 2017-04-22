@@ -19,7 +19,7 @@ namespace BinarySerializer.Adapters
 
         public override object GetValue()
         {
-            return Object = DelegateTo.GetValue();
+            return Object ?? (Object = DelegateTo.GetValue());
         }
 
         public override void SetValue(object value)
