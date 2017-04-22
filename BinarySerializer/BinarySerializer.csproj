@@ -51,12 +51,15 @@
     <Compile Include="Base\SerializationSettingsBase.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="ContractReader.cs" />
+    <Compile Include="Converters\ConverterReadResult.cs" />
     <Compile Include="Converters\ConvertersCollection.cs" />
+    <Compile Include="Converters\StreamEndReachedException.cs" />
     <Compile Include="Deserialization\DeserializationContext.cs" />
     <Compile Include="Deserialization\DeserializationSettings.cs" />
     <Compile Include="Deserialization\Stream\DeserializationStreamReader.cs" />
     <Compile Include="Deserialization\Stream\IDeserializationStreamReader.cs" />
     <Compile Include="Exceptions\StreamReaderException.cs" />
+    <Compile Include="Exceptions\UnexpectedStreamEndException.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="Extensions\TypeExtensions.cs" />
     <Compile Include="Serialization\Entries\ConvertationEntry.cs" />

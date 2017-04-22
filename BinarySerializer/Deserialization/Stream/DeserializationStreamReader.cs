@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using BinarySerializer.Adapters;
+using BinarySerializer.Converters;
 using BinarySerializer.Exceptions;
 
 namespace BinarySerializer.Deserialization.Stream
@@ -17,15 +18,30 @@ namespace BinarySerializer.Deserialization.Stream
             }
             else
             {
-                ReadRoot(objectAdapter, members, context);
+                ReadMultipleRoot(objectAdapter, members, context);
             }
+        }
+
+        private static object ExtractValueFromReadResult(ConverterReadResult readResult, out bool streamEndReached)
+        {
+            streamEndReached = readResult.StreamEndReached;
+            return readResult.Value;
+        }
+
+        private static object ExtractValueFromReadResult(ConverterReadResult readResult)
+        {
+            bool streamEndReached;
+            var result = ExtractValueFromReadResult(readResult, out streamEndReached);
+            if (streamEndReached)
+                throw new UnexpectedStreamEndException();
+            return result;
         }
 
         private void ReadSingle(ContractSingleObjectAdapter singleObject, DeserializationContext context)
         {
             var converter = context.FindConverter(singleObject.Type);
             if (converter != null)
-                singleObject.SetValue(converter.Read(context.Stream));
+                singleObject.SetValue(ExtractValueFromReadResult(converter.Read(context.Stream)));
             else if (ContractIsCreatable(singleObject.Type))
                 singleObject.SetValue(CreateContract(singleObject.Type));
             else
@@ -33,13 +49,17 @@ namespace BinarySerializer.Deserialization.Stream
         }
 
         // TODO: refactor!!
-        private void ReadRoot(ObjectAdapter objectAdapter, ICollection<ContractMemberAdapter> members, DeserializationContext context)
+        private void ReadMultipleRoot(ObjectAdapter objectAdapter, ICollection<ContractMemberAdapter> members, DeserializationContext context)
         {
             objectAdapter.SetValue(CreateContract(objectAdapter.Type));
-            while (context.Stream.Position < context.Stream.Length)
+            while (true)
             {
-                var id = (int)context.FindConverter(typeof(int)).Read(context.Stream);
-                var member = members.FirstOrDefault(m => m.Id == id);
+                bool streamEnd;
+                var idObject = ExtractValueFromReadResult(context.FindConverter(typeof(int)).Read(context.Stream),
+                    out streamEnd);
+                if (streamEnd)
+                    break;
+                var member = members.FirstOrDefault(m => m.Id == (int)idObject);
                 if (member == null)
                     throw new StreamReaderException("An unexpected member id appeared in the input stream");
 
@@ -47,20 +67,20 @@ namespace BinarySerializer.Deserialization.Stream
                 if (converter == null)
                 {
                     member.SetValue(CreateContract(member.Type));
-                    ReadSubObject(member.Children, context);
+                    ReadMultipleSubObject(member.Children, context);
                 }
                 else
                 {
-                    member.SetValue(converter.Read(context.Stream));
+                    member.SetValue(ExtractValueFromReadResult(converter.Read(context.Stream)));
                 }
             }
         }
 
-        private void ReadSubObject(ICollection<ContractMemberAdapter> members, DeserializationContext context)
+        private void ReadMultipleSubObject(ICollection<ContractMemberAdapter> members, DeserializationContext context)
         {
             while (true)
             {
-                var id = (int)context.FindConverter(typeof(int)).Read(context.Stream);
+                var id = (int)ExtractValueFromReadResult(context.FindConverter(typeof(int)).Read(context.Stream));
                 if (id == Constants.MemberEndMark)
                     break;
 
@@ -72,11 +92,11 @@ namespace BinarySerializer.Deserialization.Stream
                 if (converter == null)
                 {
                     member.SetValue(CreateContract(member.Type));
-                    ReadSubObject(member.Children, context);
+                    ReadMultipleSubObject(member.Children, context);
                 }
                 else
                 {
-                    member.SetValue(converter.Read(context.Stream));
+                    member.SetValue(ExtractValueFromReadResult(converter.Read(context.Stream)));
                 }
             }
         }

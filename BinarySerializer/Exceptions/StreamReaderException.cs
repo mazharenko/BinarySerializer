@@ -6,7 +6,7 @@ namespace BinarySerializer.Exceptions
     [Serializable]
     public class StreamReaderException : Exception
     {
-        public StreamReaderException()
+        public StreamReaderException() : this("An error has occured during the reading from the stream")
         {
         }
 

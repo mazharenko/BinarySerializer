@@ -33,7 +33,7 @@ namespace BinarySerializer.UnitTests.ConverterTests
         protected void Test<TConverter>(object expected, byte[] source) where TConverter : IConverter, new()
         {
             var stream = new MemoryStream(source);
-            Assert.AreEqual(expected, new TConverter().Read(stream));
+            Assert.AreEqual(expected, new TConverter().Read(stream).Value);
         }
     }
 }

@@ -6,6 +6,6 @@ namespace BinarySerializer.Converters
     {
         Type Type { get; }
         void Write(object source, System.IO.Stream stream);
-        object Read(System.IO.Stream stream);
+        ConverterReadResult Read(System.IO.Stream stream);
     }
 }
