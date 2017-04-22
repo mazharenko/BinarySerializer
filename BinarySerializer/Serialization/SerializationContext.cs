@@ -1,7 +1,7 @@
 ﻿using BinarySerializer.Adapters;
 using BinarySerializer.Base;
 using BinarySerializer.Serialization.Entries;
-using BinarySerializer.Serialization.Providing;
+using BinarySerializer.Serialization.Providers;
 
 namespace BinarySerializer.Serialization
 {

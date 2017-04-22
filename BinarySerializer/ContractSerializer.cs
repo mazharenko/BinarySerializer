@@ -37,30 +37,48 @@ namespace BinarySerializer
                 .ForEach(context.WriteStreamEntry);
         }
 
-        public static T Deserialize<T>(byte[] source)
+
+        public static object Deserialize(Type type, byte[] source)
         {
             using (var stream = new MemoryStream(source))
             {
-                return Deserialize<T>(stream);
+                return Deserialize(type, stream);
             }
         }
 
-        public static T Deserialize<T>(Stream source)
+        public static object Deserialize(Type type, Stream source)
         {
-            return Deserialize<T>(source, new DeserializationSettings());
+            return Deserialize(type, source, new DeserializationSettings());
         }
 
-        public static T Deserialize<T>(Stream source, DeserializationSettings settings)
+        public static object Deserialize(Type type, Stream source, DeserializationSettings settings)
         {
+            if (type == null) throw new ArgumentNullException(nameof(type));
             if (source == null) throw new ArgumentNullException(nameof(source));
             if (settings == null) throw new ArgumentNullException(nameof(settings));
             var context = new DeserializationContext(settings, source);
 
-            var objectAdapter = new ObjectAdapter(typeof(T));
+            var objectAdapter = new ObjectAdapter(type);
             var members = new ContractReader().CollectMembers(objectAdapter);
 
             settings.StreamReader.Read(objectAdapter, members, context);
-            return (T)objectAdapter.GetValue();
+            return objectAdapter.GetValue();
+        }
+
+        public static T Deserialize<T>(byte[] source)
+        {
+            return (T) Deserialize(typeof(T), source);
+        }
+
+        public static T Deserialize<T>(Stream source)
+        {
+            return (T)Deserialize(typeof(T), source);
+        }
+
+        public static T Deserialize<T>(Stream source, DeserializationSettings settings)
+        {
+
+            return (T)Deserialize(typeof(T), source, settings);
         }
     }
 }

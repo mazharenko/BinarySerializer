@@ -3,7 +3,7 @@ using System.Linq;
 using BinarySerializer.Adapters;
 using BinarySerializer.Serialization.Entries;
 
-namespace BinarySerializer.Serialization.Providing
+namespace BinarySerializer.Serialization.Providers
 {
     internal class SingleObjectStreamEntitiesProvider : IContractStreamEntriesProvider
     {

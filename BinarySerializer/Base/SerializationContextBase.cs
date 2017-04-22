@@ -1,11 +1,12 @@
 using System;
+using System.IO;
 using BinarySerializer.Converters;
 
 namespace BinarySerializer.Base
 {
     public abstract class SerializationContextBase
     {
-        protected SerializationContextBase(SerializationSettingsBase settings, System.IO.Stream stream)
+        protected SerializationContextBase(SerializationSettingsBase settings, Stream stream)
         {
             Stream = stream;
             Settings = settings;
@@ -13,7 +14,7 @@ namespace BinarySerializer.Base
 
         public SerializationSettingsBase Settings { get; }
 
-        public System.IO.Stream Stream { get; }
+        public Stream Stream { get; }
 
         public IConverter FindConverter(Type type)
         {

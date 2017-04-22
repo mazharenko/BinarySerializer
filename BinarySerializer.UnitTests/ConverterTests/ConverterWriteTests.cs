@@ -1,7 +1,7 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using BinarySerializer.Converters;
-using BinarySerializer.Converters.Integer;
-using BinarySerializer.UnitTests.ConverterTests.Cases;
+using BinarySerializer.UnitTests.ConverterTests.CaseSources;
 using NUnit.Framework;
 
 namespace BinarySerializer.UnitTests.ConverterTests
@@ -10,30 +10,15 @@ namespace BinarySerializer.UnitTests.ConverterTests
     public class ConverterWriteTests
     {
         [Test]
-        [TestCaseSource(typeof(IntegerConverterTestCaseSource), nameof(IntegerConverterTestCaseSource.GetInt32Cases))]
-        public void TestInteger(int source, byte[] expected)
-        {
-            Test<IntConverter>(source, expected);
-        }
-
-        [Test]
-        [TestCaseSource(typeof(IntegerConverterTestCaseSource), nameof(IntegerConverterTestCaseSource.GetLongCases))]
-        public void TestLong(long source, byte[] expected)
-        {
-            Test<LongConverter>(source, expected);
-        }
-
-        [Test]
         [TestCaseSource(typeof(BooleanConverterTestCaseSource))]
-        public void TestBool(bool source, byte[] expected)
-        {
-            Test<BooleanConverter>(source, expected);
-        }
-
-        protected void Test<TConverter>(object source, byte[] expected) where TConverter : IConverter, new()
+        [TestCaseSource(typeof(IntegerConverterTestCaseSource), nameof(IntegerConverterTestCaseSource.GetLongCases))]
+        [TestCaseSource(typeof(IntegerConverterTestCaseSource), nameof(IntegerConverterTestCaseSource.GetInt32Cases))]
+        [TestCaseSource(typeof(IntegerConverterTestCaseSource), nameof(IntegerConverterTestCaseSource.GetByteCases))]
+        [TestCaseSource(typeof(IntegerConverterTestCaseSource), nameof(IntegerConverterTestCaseSource.GetSByteCases))]
+        public void TestConvertersWrite(object source, byte[] expected, Type type)
         {
             var stream = new MemoryStream();
-            new TConverter().Write(source, stream);
+            ((IConverter)Activator.CreateInstance(type)).Write(source, stream);
             CollectionAssert.AreEqual(expected, stream.ToArray());
         }
     }

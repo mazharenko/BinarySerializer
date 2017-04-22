@@ -4,7 +4,7 @@ using BinarySerializer.Adapters;
 using BinarySerializer.Extensions;
 using BinarySerializer.Serialization.Entries;
 
-namespace BinarySerializer.Serialization.Providing
+namespace BinarySerializer.Serialization.Providers
 {
     internal class ContractStreamEntriesProvider : IContractStreamEntriesProvider
     {

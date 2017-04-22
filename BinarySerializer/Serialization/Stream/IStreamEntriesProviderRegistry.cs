@@ -1,5 +1,5 @@
 using BinarySerializer.Adapters;
-using BinarySerializer.Serialization.Providing;
+using BinarySerializer.Serialization.Providers;
 
 namespace BinarySerializer.Serialization.Stream
 {

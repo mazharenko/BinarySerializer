@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using BinarySerializer.Adapters;
 using BinarySerializer.Exceptions;
-using BinarySerializer.Serialization.Providing;
+using BinarySerializer.Serialization.Providers;
 
 namespace BinarySerializer.Serialization.Stream
 {
@@ -10,6 +10,7 @@ namespace BinarySerializer.Serialization.Stream
     {
         protected readonly List<IContractStreamEntriesProvider> Providers = new List<IContractStreamEntriesProvider>
         {
+            new DefaultMemberStreamEntriesProvider(),
             new ConvertingMemberStreamEntriesProvider(),
             new SingleObjectStreamEntitiesProvider(),
             new ContractStreamEntriesProvider()

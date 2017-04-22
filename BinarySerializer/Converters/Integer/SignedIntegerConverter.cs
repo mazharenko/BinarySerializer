@@ -1,16 +1,17 @@
 using System;
+using System.IO;
 
 namespace BinarySerializer.Converters.Integer
 {
     internal abstract class SignedIntegerConverter<T> : IntegerConverter<T>
     {
-        protected void WriteLong(long source, System.IO.Stream stream)
+        protected void WriteLong(long source, Stream stream)
         {
             var casted = unchecked ((ulong)(source < 0 ? Math.Abs(source + 1) : source));
             Write(casted, source < 0, stream);
         }
 
-        protected long ReadLong(System.IO.Stream stream)
+        protected long ReadLong(Stream stream)
         {
             bool negative;
             var fromStream = Read(stream, out negative);

@@ -2,7 +2,7 @@
 using BinarySerializer.Adapters;
 using BinarySerializer.Serialization.Entries;
 
-namespace BinarySerializer.Serialization.Providing
+namespace BinarySerializer.Serialization.Providers
 {
     public interface IContractStreamEntriesProvider
     {

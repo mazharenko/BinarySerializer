@@ -1,5 +1,4 @@
-﻿using BinarySerializer.UnitTests.Contracts;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 
 namespace BinarySerializer.UnitTests
 {
@@ -7,18 +6,18 @@ namespace BinarySerializer.UnitTests
     public class EmptyObjectsTests
     {
         [Test]
-        public void TestEmpty()
+        [TestCaseSource(typeof(EmptyTestCaseSource))]
+        public void TestEmpty(object empty)
         {
-            var empty = new Empty();
-
             var bytes = ContractSerializer.Serialize(empty);
 
             CollectionAssert.IsEmpty(bytes);
 
-            var deserialized = ContractSerializer.Deserialize<Empty>(bytes);
+            var deserialized = ContractSerializer.Deserialize(empty.GetType(), bytes);
 
             Assert.IsNotNull(deserialized);
-            Assert.IsInstanceOf<Empty>(deserialized);
+            Assert.IsInstanceOf(empty.GetType(), deserialized);
         }
+
     }
 }

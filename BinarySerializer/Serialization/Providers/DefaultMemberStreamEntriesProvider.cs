@@ -1,20 +1,20 @@
 using System.Collections.Generic;
 using BinarySerializer.Adapters;
+using BinarySerializer.Extensions;
 using BinarySerializer.Serialization.Entries;
 
-namespace BinarySerializer.Serialization.Providing
+namespace BinarySerializer.Serialization.Providers
 {
-    internal class ConvertingMemberStreamEntriesProvider : IContractStreamEntriesProvider
+    internal class DefaultMemberStreamEntriesProvider : IContractStreamEntriesProvider
     {
         public bool GetIsApplicable(ContractMemberAdapter memberAdapter, SerializationContext serializationContext)
         {
-            return serializationContext.FindConverter(memberAdapter.Type) != null;
+            return memberAdapter.GetValue() == memberAdapter.Type.Default();
         }
 
         public IEnumerable<ISerializationStreamEntry> Provide(ContractMemberAdapter memberAdapter, SerializationContext serializationContext)
         {
-            yield return new MemberHeaderEntry(memberAdapter.Id);
-            yield return new ConvertationEntry(memberAdapter.Type, memberAdapter.GetValue());
+            yield break;
         }
     }
 }

@@ -1,3 +1,4 @@
+using System.IO;
 using System.Linq;
 
 namespace BinarySerializer.Converters.Integer
@@ -15,7 +16,7 @@ namespace BinarySerializer.Converters.Integer
     {
         private const byte Size = 8;
 
-        protected void Write(ulong source, bool negative, System.IO.Stream stream)
+        protected void Write(ulong source, bool negative, Stream stream)
         {
             if (!negative && source >> 7 == 0)
                 WriteShort(source, stream);
@@ -23,12 +24,12 @@ namespace BinarySerializer.Converters.Integer
                 WriteLong(source, negative, stream);
         }
 
-        private static void WriteShort(ulong source, System.IO.Stream stream)
+        private static void WriteShort(ulong source, Stream stream)
         {
             stream.WriteByte((byte) (0x80 + source));
         }
 
-        private static void WriteLong(ulong source, bool negative, System.IO.Stream stream)
+        private static void WriteLong(ulong source, bool negative, Stream stream)
         {
             var offset = Size;
             var sizeFixed = false;
@@ -63,7 +64,7 @@ namespace BinarySerializer.Converters.Integer
         // negative if 0001, non-negative if 0000
         // 4 bits - size, how many bytes was enough to store value, 0 for -1
         // [size] bytes - value, exact if non-negative, |x|-1 if negative. obviously, skipped for -1.
-        protected ulong Read(System.IO.Stream stream, out bool negative)
+        protected ulong Read(Stream stream, out bool negative)
         {
             negative = false;
             var firstByte = ReadBytes(stream, 1).Single();

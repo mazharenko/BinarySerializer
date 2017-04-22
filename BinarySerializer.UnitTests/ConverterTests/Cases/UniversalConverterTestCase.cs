@@ -1,3 +1,4 @@
+using System;
 using NUnit.Framework;
 
 namespace BinarySerializer.UnitTests.ConverterTests.Cases
@@ -7,7 +8,8 @@ namespace BinarySerializer.UnitTests.ConverterTests.Cases
         public T Object { get; }
         public byte[] Bytes { get; }
 
-        public UniversalConverterTestCase(T @object, byte[] bytes, string key) : base(@object, bytes)
+        public UniversalConverterTestCase(T @object, byte[] bytes, string key, Type converterType)
+            : base(@object, bytes, converterType)
         {
             Object = @object;
             Bytes = bytes;

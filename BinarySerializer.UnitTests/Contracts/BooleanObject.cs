@@ -1,5 +1,4 @@
-﻿using System.Runtime.Serialization;
-using BinarySerializer.Attributes;
+﻿using BinarySerializer.Attributes;
 
 namespace BinarySerializer.UnitTests.Contracts
 {

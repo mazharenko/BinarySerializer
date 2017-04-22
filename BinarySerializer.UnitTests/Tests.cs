@@ -1,6 +1,4 @@
-﻿using System;
-using BinarySerializer.UnitTests.Contracts;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 
 namespace BinarySerializer.UnitTests
 {
