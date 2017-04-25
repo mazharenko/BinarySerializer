@@ -6,11 +6,11 @@ using BinarySerializer.Serialization.Entries;
 
 namespace BinarySerializer.Serialization.Providers
 {
-    internal class ContractStreamEntriesProvider : IContractStreamEntriesProvider
+    internal class ContractStreamEntriesProvider : IStreamEntriesProvider
     {
         public bool GetIsApplicable(ContractMemberAdapter memberAdapter, SerializationContext serializationContext)
         {
-            return memberAdapter.Children != null;
+            return memberAdapter.Children != null && memberAdapter.Children.Any();
         }
 
         public IEnumerable<ISerializationStreamEntry> Provide(ContractMemberAdapter memberAdapter,
@@ -24,5 +24,4 @@ namespace BinarySerializer.Serialization.Providers
                 .Concat(new MemberEndingEntry().AsEnumerable());
         }
     }
-
 }

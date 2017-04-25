@@ -8,15 +8,18 @@ namespace BinarySerializer.Serialization.Stream
 {
     internal class StreamEntriesProviderRegistry : IStreamEntriesProviderRegistry
     {
-        protected readonly List<IContractStreamEntriesProvider> Providers = new List<IContractStreamEntriesProvider>
+        protected readonly List<IStreamEntriesProvider> Providers = new List<IStreamEntriesProvider>
         {
             new DefaultMemberStreamEntriesProvider(),
+            new ContractStreamEntriesProvider(), // ПЕРЕСТАВИЛ!!!
             new ConvertingMemberStreamEntriesProvider(),
+            new ListStreamEntriesProvider(),
             new SingleObjectStreamEntitiesProvider(),
-            new ContractStreamEntriesProvider()
+            //new ContractStreamEntriesProvider()
+            new EmptyContractStreamEntriesProvider()
         };
 
-        public IContractStreamEntriesProvider GetProvider(ContractMemberAdapter memberAdapter,
+        public IStreamEntriesProvider GetProvider(ContractMemberAdapter memberAdapter,
             SerializationContext serializationContext)
         {
             var provider = Providers.FirstOrDefault(s => s.GetIsApplicable(memberAdapter, serializationContext));

@@ -5,7 +5,7 @@ using BinarySerializer.Serialization.Entries;
 
 namespace BinarySerializer.Serialization.Providers
 {
-    internal class SingleObjectStreamEntitiesProvider : IContractStreamEntriesProvider
+    internal class SingleObjectStreamEntitiesProvider : IStreamEntriesProvider
     {
         public bool GetIsApplicable(ContractMemberAdapter memberAdapter, SerializationContext serializationContext)
         {

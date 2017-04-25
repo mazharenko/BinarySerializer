@@ -39,16 +39,12 @@ namespace BinarySerializer.Deserialization.Stream
 
         private void ReadSingle(ContractSingleObjectAdapter singleObject, DeserializationContext context)
         {
-            var converter = context.FindConverter(singleObject.Type);
-            if (converter != null)
-                singleObject.SetValue(ExtractValueFromReadResult(converter.Read(context.Stream)));
-            else if (ContractIsCreatable(singleObject.Type))
+            if (ContractIsCreatable(singleObject.Type))
                 singleObject.SetValue(CreateContract(singleObject.Type));
-            else
-                throw new UnknownTypeException(singleObject.Type);
+
+            context.GetDeserializationExecutor(singleObject)?.Execute(singleObject, context);
         }
 
-        // TODO: refactor!!
         private void ReadMultipleRoot(ObjectAdapter objectAdapter, ICollection<ContractMemberAdapter> members, DeserializationContext context)
         {
             objectAdapter.SetValue(CreateContract(objectAdapter.Type));
@@ -80,15 +76,16 @@ namespace BinarySerializer.Deserialization.Stream
             if (member == null)
                 throw new StreamReaderException("An unexpected member id appeared in the input stream");
 
-            var converter = context.FindConverter(member.Type);
-            if (converter == null)
-            {
+            if (ContractIsCreatable(member.Type))
                 member.SetValue(CreateContract(member.Type));
+
+            if (member.Children.Any())
+            {
                 ReadMultipleSubObject(member.Children, context);
             }
             else
             {
-                member.SetValue(ExtractValueFromReadResult(converter.Read(context.Stream)));
+                context.GetDeserializationExecutor(member)?.Execute(member, context);
             }
         }
 

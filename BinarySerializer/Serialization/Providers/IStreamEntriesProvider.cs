@@ -4,7 +4,7 @@ using BinarySerializer.Serialization.Entries;
 
 namespace BinarySerializer.Serialization.Providers
 {
-    public interface IContractStreamEntriesProvider
+    public interface IStreamEntriesProvider
     {
         IEnumerable<ISerializationStreamEntry> Provide(ContractMemberAdapter memberAdapter, SerializationContext serializationContext);
         bool GetIsApplicable(ContractMemberAdapter memberAdapter, SerializationContext serializationContext);

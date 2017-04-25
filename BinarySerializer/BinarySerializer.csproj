@@ -50,7 +50,7 @@
     <Compile Include="Base\SerializationContextBase.cs" />
     <Compile Include="Base\SerializationSettingsBase.cs" />
     <Compile Include="Constants.cs" />
-    <Compile Include="ContractReader.cs" />
+    <Compile Include="ContractGraphReader.cs" />
     <Compile Include="Converters\ByteConverter.cs" />
     <Compile Include="Converters\ConverterReadResult.cs" />
     <Compile Include="Converters\ConvertersCollection.cs" />
@@ -58,7 +58,12 @@
     <Compile Include="Converters\StringConverter.cs" />
     <Compile Include="Deserialization\DeserializationContext.cs" />
     <Compile Include="Deserialization\DeserializationSettings.cs" />
+    <Compile Include="Deserialization\Executors\ConvertingMemberExecutor.cs" />
+    <Compile Include="Deserialization\Executors\IDeserializationExecutor.cs" />
+    <Compile Include="Deserialization\Executors\MemberExecutorBase.cs" />
+    <Compile Include="Deserialization\Stream\DeserializationExecutorRegistry.cs" />
     <Compile Include="Deserialization\Stream\DeserializationStreamReader.cs" />
+    <Compile Include="Deserialization\Stream\IDeserializationExecutorRegistry.cs" />
     <Compile Include="Deserialization\Stream\IDeserializationStreamReader.cs" />
     <Compile Include="Exceptions\StreamEndReachedException.cs" />
     <Compile Include="Exceptions\StreamReaderException.cs" />
@@ -72,7 +77,9 @@
     <Compile Include="Serialization\Providers\ContractStreamEntriesProvider.cs" />
     <Compile Include="Serialization\Providers\ConvertingMemberStreamEntriesProvider.cs" />
     <Compile Include="Serialization\Providers\DefaultMemberStreamEntriesProvider.cs" />
-    <Compile Include="Serialization\Providers\IContractStreamEntriesProvider.cs" />
+    <Compile Include="Serialization\Providers\EmptyContractStreamEntriesProvider.cs" />
+    <Compile Include="Serialization\Providers\ListStreamEntriesProvider.cs" />
+    <Compile Include="Serialization\Providers\IStreamEntriesProvider.cs" />
     <Compile Include="Serialization\Providers\SingleObjectStreamEntitiesProvider.cs" />
     <Compile Include="Serialization\SerializationContext.cs" />
     <Compile Include="Serialization\SerializationSettings.cs" />

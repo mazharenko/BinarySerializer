@@ -7,6 +7,11 @@ namespace BinarySerializer.Serialization.Entries
         public Type Type { get; }
         public object Value { get; }
 
+        public ConvertationEntry(object value) : this(value.GetType(), value)
+        {
+
+        }
+
         public ConvertationEntry(Type type, object value)
         {
             Type = type;

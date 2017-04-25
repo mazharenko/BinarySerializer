@@ -25,5 +25,10 @@ namespace BinarySerializer.Serialization.Entries
         {
             return Id;
         }
+
+        public override string ToString()
+        {
+            return $"header/{Id}";
+        }
     }
 }

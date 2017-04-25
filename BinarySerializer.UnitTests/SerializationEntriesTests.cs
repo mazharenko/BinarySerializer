@@ -4,12 +4,13 @@ using BinarySerializer.Extensions;
 using BinarySerializer.Serialization;
 using BinarySerializer.Serialization.Entries;
 using BinarySerializer.Serialization.Stream;
+using BinarySerializer.UnitTests.SerializationEntriesCases;
 using NUnit.Framework;
 using Rhino.Mocks;
 
 namespace BinarySerializer.UnitTests
 {
-    public abstract class SerializationEntriesTests
+    public class SerializationEntriesTests
     {
         protected SerializationSettings Settings;
 
@@ -23,7 +24,12 @@ namespace BinarySerializer.UnitTests
             Settings.StreamWriter.GetMockRepository().Ordered();
         }
 
-        protected void AssertSerializationEntries(object source, IEnumerable<ISerializationStreamEntry> expected)
+        [Test]
+        [TestCaseSource(typeof(SerializationEntriesComplexObjectTestCaseSource))]
+        [TestCaseSource(typeof(SerializationEntriesListTestCaseSource), nameof(SerializationEntriesListTestCaseSource.GetSimpleCases))]
+        [TestCaseSource(typeof(SerializationEntriesListTestCaseSource), nameof(SerializationEntriesListTestCaseSource.GetEmptyCases))]
+        [TestCaseSource(typeof(SerializationEntriesListTestCaseSource), nameof(SerializationEntriesListTestCaseSource.GetCombinedCases))]
+        public void Test(object source, IEnumerable<ISerializationStreamEntry> expected)
         {
             expected.ForEach(
                 e => Settings.StreamWriter.Expect(w => w.Write(Arg<ISerializationStreamEntry>

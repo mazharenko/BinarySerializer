@@ -5,7 +5,7 @@ namespace BinarySerializer.Serialization.Stream
 {
     public interface IStreamEntriesProviderRegistry
     {
-        IContractStreamEntriesProvider GetProvider(ContractMemberAdapter memberAdapter,
+        IStreamEntriesProvider GetProvider(ContractMemberAdapter memberAdapter,
             SerializationContext serializationContext);
     }
 }

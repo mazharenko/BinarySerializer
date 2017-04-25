@@ -10,6 +10,9 @@ namespace BinarySerializer.UnitTests
         public void Test2()
         {
             var d = ContractSerializer.Serialize(45);
+
+            var o = ContractSerializer.Deserialize<int>(d);
+
         }
 
         enum A

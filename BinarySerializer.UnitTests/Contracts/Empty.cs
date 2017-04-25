@@ -1,4 +1,6 @@
-﻿namespace BinarySerializer.UnitTests.Contracts
+﻿using BinarySerializer.Adapters;
+
+namespace BinarySerializer.UnitTests.Contracts
 {
     public class Empty
     {

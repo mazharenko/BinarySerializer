@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace BinarySerializer.Extensions
 {
@@ -10,6 +12,19 @@ namespace BinarySerializer.Extensions
                 return Activator.CreateInstance(type);
             return null;
         }
-        
+
+        // Только List??? Array просто так не создать
+        public static Type GetIListImlementaionElementType(this Type sourceType)
+        {
+            if (sourceType.IsAbstract || sourceType.IsInterface)
+                return null;
+            return sourceType.GetInterfaces()
+                .Concat(sourceType.AsEnumerable())
+                .FirstOrDefault(i =>
+                     i.IsConstructedGenericType
+                    && !i.ContainsGenericParameters
+                    && i.GetGenericTypeDefinition() == typeof(IList<>)
+                )?.GetGenericArguments().Single();
+        }
     }
 }

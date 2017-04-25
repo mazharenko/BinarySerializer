@@ -1,4 +1,6 @@
+using BinarySerializer.Adapters;
 using BinarySerializer.Base;
+using BinarySerializer.Deserialization.Executors;
 
 namespace BinarySerializer.Deserialization
 {
@@ -10,5 +12,11 @@ namespace BinarySerializer.Deserialization
         }
 
         public new DeserializationSettings Settings => (DeserializationSettings) base.Settings;
+
+        public IDeserializationExecutor GetDeserializationExecutor(ContractMemberAdapter memberAdapter)
+        {
+            return Settings.ExecutorRegistry.GetExecutor(memberAdapter, this);
+        }
+
     }
 }

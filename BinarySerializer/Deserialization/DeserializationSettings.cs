@@ -8,7 +8,9 @@ namespace BinarySerializer.Deserialization
         public DeserializationSettings()
         {
             StreamReader = new DeserializationStreamReader();
+            ExecutorRegistry = new DeserializationExecutorRegistry();
         }
-        public IDeserializationStreamReader StreamReader { get; set; }
+        public IDeserializationStreamReader StreamReader { get; internal set; }
+        public IDeserializationExecutorRegistry ExecutorRegistry { get; internal set; }
     }
 }

@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace BinarySerializer.Extensions
 {
@@ -16,7 +15,7 @@ namespace BinarySerializer.Extensions
 
         public static IEnumerable<T> AsEnumerable<T>(this T source)
         {
-            return Enumerable.Repeat(source, 1);
+            yield return source;
         }
     }
 }

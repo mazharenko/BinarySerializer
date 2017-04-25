@@ -12,7 +12,7 @@ namespace BinarySerializer.Adapters
 
         public ObjectDelegatingAdapter(object @object, ContractMemberAdapter delegateTo) : base(delegateTo.Type, @object)
         {
-            if (@object != null && @object.GetType() == delegateTo.Type)
+            if (@object != null && @object.GetType() != delegateTo.Type)
                 throw new ArgumentException();
             DelegateTo = delegateTo;
         }

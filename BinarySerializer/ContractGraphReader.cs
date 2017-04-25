@@ -9,10 +9,10 @@ using BinarySerializer.Extensions;
 
 namespace BinarySerializer
 {
-    internal class ContractReader
+    internal class ContractGraphReader
     {
         // todo что теперь делать с этой проверкой
-        public void ValidateContractType(Type type)
+        private void ValidateContractType(Type type)
         {
             if (type == null) throw new ArgumentNullException(nameof(type));
 
@@ -40,7 +40,17 @@ namespace BinarySerializer
 
         public ICollection<ContractMemberAdapter> CollectMembers(ObjectAdapter contractAdapter)
         {
-            if (contractAdapter == null) return new List<ContractMemberAdapter>();
+            var members = CollectMembersInternal(contractAdapter);
+
+            return members.Any()
+                ? members
+                : new ContractSingleObjectAdapter(0, contractAdapter).AsEnumerable<ContractMemberAdapter>().ToList();
+        }
+
+        private List<ContractMemberAdapter> CollectMembersInternal(ObjectAdapter contractAdapter)
+        {
+            if (contractAdapter == null)
+                return new List<ContractMemberAdapter>();
 
             ValidateContractType(contractAdapter.Type);
 
@@ -60,12 +70,9 @@ namespace BinarySerializer
             members.ForEach(a =>
             {
                 if (!IsTerminalType(a.Type))
-                    CollectMembers(new ObjectDelegatingAdapter(a)).ForEach(a.Children.Add);
+                    CollectMembersInternal(new ObjectDelegatingAdapter(a)).ForEach(a.Children.Add);
             });
-
-            return members.Any()
-                ? members
-                : new ContractSingleObjectAdapter(0, contractAdapter).AsEnumerable<ContractMemberAdapter>().ToList();
+            return members;
         }
 
         private static int? GetAndCheckMemberId(Type type, MemberInfo prop, ICollection<int> visitedAttributes)

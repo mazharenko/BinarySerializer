@@ -11,7 +11,7 @@ namespace BinarySerializer.Serialization
             EntryProviderRegistry = new StreamEntriesProviderRegistry();
         }
 
-        public ISerializationStreamWriter StreamWriter { get; set; }
-        public IStreamEntriesProviderRegistry EntryProviderRegistry { get; set; }
+        public ISerializationStreamWriter StreamWriter { get; internal set; }
+        public IStreamEntriesProviderRegistry EntryProviderRegistry { get; internal set; }
     }
 }

@@ -30,8 +30,8 @@ namespace BinarySerializer
             if (contract == null) throw new ArgumentNullException(nameof(contract));
             if (destination == null) throw new ArgumentNullException(nameof(destination));
             var context = new SerializationContext(settings, destination);
-            new ContractReader().CollectMembers(contract.GetType(), contract)
-                .SelectMany(
+            var members = new ContractGraphReader().CollectMembers(contract.GetType(), contract);
+            members.SelectMany(
                     contractMemberAdapter => context.GetStreamEntriesProvider(contractMemberAdapter)
                         .Provide(contractMemberAdapter, context))
                 .ForEach(context.WriteStreamEntry);
@@ -59,7 +59,7 @@ namespace BinarySerializer
             var context = new DeserializationContext(settings, source);
 
             var objectAdapter = new ObjectAdapter(type);
-            var members = new ContractReader().CollectMembers(objectAdapter);
+            var members = new ContractGraphReader().CollectMembers(objectAdapter);
 
             settings.StreamReader.Read(objectAdapter, members, context);
             return objectAdapter.GetValue();

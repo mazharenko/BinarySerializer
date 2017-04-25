@@ -3,7 +3,6 @@ using System.IO;
 using BinarySerializer.Converters;
 using BinarySerializer.UnitTests.ConverterTests.CaseSources;
 using NUnit.Framework;
-using Rhino.Mocks.Constraints;
 
 namespace BinarySerializer.UnitTests.ConverterTests
 {

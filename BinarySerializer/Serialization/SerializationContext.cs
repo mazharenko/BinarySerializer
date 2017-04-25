@@ -15,7 +15,7 @@ namespace BinarySerializer.Serialization
 
         public new SerializationSettings Settings => (SerializationSettings) base.Settings;
 
-        public IContractStreamEntriesProvider GetStreamEntriesProvider(ContractMemberAdapter memberAdapter)
+        public IStreamEntriesProvider GetStreamEntriesProvider(ContractMemberAdapter memberAdapter)
         {
             return Settings.EntryProviderRegistry.GetProvider(memberAdapter, this);
         }

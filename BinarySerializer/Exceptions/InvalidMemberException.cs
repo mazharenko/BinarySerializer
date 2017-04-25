@@ -8,7 +8,7 @@ namespace BinarySerializer.Exceptions
     public class InvalidMemberException : Exception
     {
         public InvalidMemberException(ContractMemberAdapter memberAdapter) : this(
-            $"Unable to determine a writer for {memberAdapter.Id}:{memberAdapter.Name}")
+            $"Unable to determine a handler for {memberAdapter.Id}:{memberAdapter.Name}")
         {
         }
 
