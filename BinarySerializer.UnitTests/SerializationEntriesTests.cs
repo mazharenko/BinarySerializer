@@ -20,6 +20,7 @@ namespace BinarySerializer.UnitTests
             {
                 StreamWriter = MockRepository.GenerateStrictMock<ISerializationStreamWriter>()
             };
+            Settings.StreamWriter.GetMockRepository().Ordered();
         }
 
         protected void AssertSerializationEntries(object source, IEnumerable<ISerializationStreamEntry> expected)
