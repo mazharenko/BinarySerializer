@@ -11,7 +11,7 @@ namespace BinarySerializer.UnitTests
         {
             var bytes = ContractSerializer.Serialize(empty);
 
-            CollectionAssert.IsEmpty(bytes);
+            Assert.AreEqual(new byte[] {129, 128}, bytes);
 
             var deserialized = ContractSerializer.Deserialize(empty.GetType(), bytes);
 

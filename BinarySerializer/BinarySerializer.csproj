@@ -43,6 +43,7 @@
     <Compile Include="Adapters\ContractFieldAdapter.cs" />
     <Compile Include="Adapters\ContractMemberAdapter.cs" />
     <Compile Include="Adapters\ContractPropertyAdapter.cs" />
+    <Compile Include="Adapters\ContractRootAdapter.cs" />
     <Compile Include="Adapters\ContractSingleObjectAdapter.cs" />
     <Compile Include="Adapters\ObjectAdapter.cs" />
     <Compile Include="Adapters\ObjectDelegatingAdapter.cs" />
@@ -80,6 +81,7 @@
     <Compile Include="Serialization\Providers\EmptyContractStreamEntriesProvider.cs" />
     <Compile Include="Serialization\Providers\ListStreamEntriesProvider.cs" />
     <Compile Include="Serialization\Providers\IStreamEntriesProvider.cs" />
+    <Compile Include="Serialization\Providers\RootContractStreamEntriesProvider.cs" />
     <Compile Include="Serialization\Providers\SingleObjectStreamEntitiesProvider.cs" />
     <Compile Include="Serialization\SerializationContext.cs" />
     <Compile Include="Serialization\SerializationSettings.cs" />

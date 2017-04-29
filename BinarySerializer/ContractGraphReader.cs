@@ -29,22 +29,25 @@ namespace BinarySerializer
             return false;
         }
 
-        public ICollection<ContractMemberAdapter> CollectMembers(Type type, object contract)
+        public ContractMemberAdapter CollectMembers(Type type, object contract)
         {
-            if (contract == null) return new List<ContractMemberAdapter>();
+            if (contract == null) return null;
             if (!type.IsInstanceOfType(contract))
                 throw new ArgumentException();
 
             return CollectMembers(new ObjectAdapter(contract));
         }
 
-        public ICollection<ContractMemberAdapter> CollectMembers(ObjectAdapter contractAdapter)
+        public ContractMemberAdapter CollectMembers(ObjectAdapter contractAdapter)
         {
             var members = CollectMembersInternal(contractAdapter);
 
-            return members.Any()
-                ? members
-                : new ContractSingleObjectAdapter(0, contractAdapter).AsEnumerable<ContractMemberAdapter>().ToList();
+            if (!members.Any())
+                return new ContractSingleObjectAdapter(contractAdapter);
+
+            var root = new ContractRootAdapter(contractAdapter);
+            members.ForEach(root.Children.Add);
+            return root;
         }
 
         private List<ContractMemberAdapter> CollectMembersInternal(ObjectAdapter contractAdapter)

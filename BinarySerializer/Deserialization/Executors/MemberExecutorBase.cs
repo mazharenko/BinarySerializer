@@ -1,9 +1,10 @@
-﻿using BinarySerializer.Converters;
+﻿using BinarySerializer.Adapters;
+using BinarySerializer.Converters;
 using BinarySerializer.Exceptions;
 
 namespace BinarySerializer.Deserialization.Executors
 {
-    public class MemberExecutorBase
+    public abstract class MemberExecutorBase : IDeserializationExecutor
     {
         protected static object ExtractValueFromReadResult(ConverterReadResult readResult)
         {
@@ -20,5 +21,7 @@ namespace BinarySerializer.Deserialization.Executors
             return readResult.Value;
         }
 
+        public abstract bool GetIsApplicable(ContractMemberAdapter member, DeserializationContext context);
+        public abstract void Execute(ContractMemberAdapter member, DeserializationContext context);
     }
 }

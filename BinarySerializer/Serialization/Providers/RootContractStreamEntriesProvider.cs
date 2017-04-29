@@ -5,18 +5,18 @@ using BinarySerializer.Serialization.Entries;
 
 namespace BinarySerializer.Serialization.Providers
 {
-    internal class SingleObjectStreamEntitiesProvider : IStreamEntriesProvider
+    internal class RootContractStreamEntriesProvider : IStreamEntriesProvider
     {
         public bool GetIsApplicable(ContractMemberAdapter memberAdapter, SerializationContext serializationContext)
         {
-            return memberAdapter is ContractSingleObjectAdapter
-                   && serializationContext.FindConverter(memberAdapter.Type) != null;
+            return memberAdapter is ContractRootAdapter && memberAdapter.Children != null && memberAdapter.Children.Any();
         }
 
         public IEnumerable<ISerializationStreamEntry> Provide(ContractMemberAdapter memberAdapter,
             SerializationContext serializationContext)
         {
-            yield return new ConvertationEntry(memberAdapter.Type, memberAdapter.GetValue());
+            return memberAdapter.Children.SelectMany(c => serializationContext.GetStreamEntriesProvider(c)
+                .Provide(c, serializationContext));
         }
     }
 }

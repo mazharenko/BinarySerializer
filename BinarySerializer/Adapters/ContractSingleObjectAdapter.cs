@@ -1,29 +1,17 @@
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
 namespace BinarySerializer.Adapters
 {
-    internal class ContractSingleObjectAdapter : ContractMemberAdapter
+    internal class ContractSingleObjectAdapter : ContractRootAdapter
     {
-        public ContractSingleObjectAdapter(int id, ObjectAdapter contract) : base(id, contract)
+        private readonly ReadOnlyCollection<ContractMemberAdapter> _children;
+
+        public ContractSingleObjectAdapter(ObjectAdapter contract) : base(contract)
         {
+            _children = new List<ContractMemberAdapter>().AsReadOnly();
         }
 
-        public override string Name => "root";
-        public override Type Type => ContractAdapter.Type;
-
-        public override object GetValue()
-        {
-            return ContractAdapter.GetValue();
-        }
-
-        public override void SetValue(object value)
-        {
-            ContractAdapter.SetValue(value);
-        }
-
-        public override IList<ContractMemberAdapter> Children
-            => new ReadOnlyCollection<ContractMemberAdapter>(base.Children);
+        public override IList<ContractMemberAdapter> Children => _children;
     }
 }

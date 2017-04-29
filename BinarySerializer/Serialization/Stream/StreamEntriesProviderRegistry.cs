@@ -11,11 +11,11 @@ namespace BinarySerializer.Serialization.Stream
         protected readonly List<IStreamEntriesProvider> Providers = new List<IStreamEntriesProvider>
         {
             new DefaultMemberStreamEntriesProvider(),
-            new ContractStreamEntriesProvider(), // ПЕРЕСТАВИЛ!!!
+            new SingleObjectStreamEntitiesProvider(),
             new ConvertingMemberStreamEntriesProvider(),
             new ListStreamEntriesProvider(),
-            new SingleObjectStreamEntitiesProvider(),
-            //new ContractStreamEntriesProvider()
+            new RootContractStreamEntriesProvider(),
+            new ContractStreamEntriesProvider(),
             new EmptyContractStreamEntriesProvider()
         };
 
