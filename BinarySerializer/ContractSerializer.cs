@@ -61,7 +61,7 @@ namespace BinarySerializer
             var objectAdapter = new ObjectAdapter(type);
             var members = new ContractGraphReader().CollectMembers(objectAdapter);
 
-            settings.StreamReader.Read(objectAdapter, members.AsEnumerable().ToList(), context);
+            settings.StreamReader.Read(/*objectAdapter, */members, context);
             return objectAdapter.GetValue();
         }
 

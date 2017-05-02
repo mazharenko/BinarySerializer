@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using BinarySerializer.Adapters;
+using BinarySerializer.Extensions;
 using BinarySerializer.Serialization.Entries;
 
 namespace BinarySerializer.Serialization.Providers
@@ -9,7 +10,9 @@ namespace BinarySerializer.Serialization.Providers
     {
         public bool GetIsApplicable(ContractMemberAdapter memberAdapter, SerializationContext serializationContext)
         {
-            return memberAdapter is ContractRootAdapter && memberAdapter.Children != null && memberAdapter.Children.Any();
+            return memberAdapter is ContractRootAdapter &&
+                   memberAdapter.Type
+                       .ContractIsCreatable(); //&& memberAdapter.Children != null && memberAdapter.Children.Any();
         }
 
         public IEnumerable<ISerializationStreamEntry> Provide(ContractMemberAdapter memberAdapter,

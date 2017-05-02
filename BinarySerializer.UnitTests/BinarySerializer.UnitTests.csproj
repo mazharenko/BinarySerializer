@@ -48,6 +48,7 @@
     <Compile Include="Contracts\BooleanObject.cs" />
     <Compile Include="Contracts\ComplexObject.cs" />
     <Compile Include="Contracts\EmptyHolder.cs" />
+    <Compile Include="Contracts\EmptySubHolder.cs" />
     <Compile Include="Contracts\Generic.cs" />
     <Compile Include="Contracts\ListComplexObject.cs" />
     <Compile Include="Contracts\SubComplexObject.cs" />

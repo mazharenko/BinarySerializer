@@ -5,6 +5,6 @@ namespace BinarySerializer.Deserialization.Stream
 {
     public interface IDeserializationStreamReader
     {
-        void Read(ObjectAdapter objectAdapter, ICollection<ContractMemberAdapter> members, DeserializationContext context);
+        void Read(/*ObjectAdapter objectAdapter,*/ ContractMemberAdapter members, DeserializationContext context);
     }
 }

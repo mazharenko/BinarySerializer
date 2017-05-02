@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using BinarySerializer.Exceptions;
 
 namespace BinarySerializer.Extensions
 {
@@ -13,7 +14,6 @@ namespace BinarySerializer.Extensions
             return null;
         }
 
-        // Только List??? Array просто так не создать
         public static Type GetIListImlementaionElementType(this Type sourceType)
         {
             if (sourceType.IsAbstract || sourceType.IsInterface)
@@ -25,6 +25,19 @@ namespace BinarySerializer.Extensions
                     && !i.ContainsGenericParameters
                     && i.GetGenericTypeDefinition() == typeof(IList<>)
                 )?.GetGenericArguments().Single();
+        }
+
+        public static object CreateContract(this Type type)
+        {
+            if (!ContractIsCreatable(type))
+                throw new InvalidConfigurationException($"The specified type can't be instantiated - {type}");
+
+            return Activator.CreateInstance(type);
+        }
+
+        public static bool ContractIsCreatable(this Type type)
+        {
+            return type.GetConstructor(new Type[0]) != null;
         }
     }
 }

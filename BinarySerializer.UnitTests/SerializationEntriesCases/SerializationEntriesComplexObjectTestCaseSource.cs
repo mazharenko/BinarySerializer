@@ -12,7 +12,7 @@ namespace BinarySerializer.UnitTests.SerializationEntriesCases
             yield return new SerializationEntriesTestCase("EmptyHolder", new EmptyHolder(),
                 new List<ISerializationStreamEntry>
                 {
-                    new MemberHeaderEntry(1),
+                    new MemberHeaderEntry(100),
                     new MemberEndingEntry()
                 });
             yield return new SerializationEntriesTestCase("GenericSimple", new Generic<int>

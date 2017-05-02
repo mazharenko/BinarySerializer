@@ -43,10 +43,12 @@ namespace BinarySerializer.Serialization.Providers
             return elements.Cast<object>()
                 .SelectMany(element =>
                 {
-                    var serializationStreamEntries = new ContractGraphReader().CollectMembers(new ObjectAdapter(element)).Children
+                    var serializationStreamEntries = new ContractGraphReader()
+                        .CollectMembers(new ObjectAdapter(element))
+                        .Children
                         .SelectMany(innerMember => serializationContext.GetStreamEntriesProvider(innerMember)
                             .Provide(innerMember, serializationContext))
-                            .ToList();
+                        .ToList();
                     return new MemberHeaderEntry(Constants.ListElementMark).AsEnumerable()
                         .Concat(
                             serializationStreamEntries

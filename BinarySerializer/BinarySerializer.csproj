@@ -57,11 +57,13 @@
     <Compile Include="Converters\ConvertersCollection.cs" />
     <Compile Include="Converters\SByteConverter.cs" />
     <Compile Include="Converters\StringConverter.cs" />
+    <Compile Include="Deserialization\ConverterReadResultExtenstion.cs" />
     <Compile Include="Deserialization\DeserializationContext.cs" />
     <Compile Include="Deserialization\DeserializationSettings.cs" />
-    <Compile Include="Deserialization\Executors\ConvertingMemberExecutor.cs" />
+    <Compile Include="Deserialization\Executors\ContractDeserializationExecutor.cs" />
+    <Compile Include="Deserialization\Executors\ConvertingDeserializationExecutor.cs" />
     <Compile Include="Deserialization\Executors\IDeserializationExecutor.cs" />
-    <Compile Include="Deserialization\Executors\MemberExecutorBase.cs" />
+    <Compile Include="Deserialization\Executors\ListDeserializationExecutor.cs" />
     <Compile Include="Deserialization\Stream\DeserializationExecutorRegistry.cs" />
     <Compile Include="Deserialization\Stream\DeserializationStreamReader.cs" />
     <Compile Include="Deserialization\Stream\IDeserializationExecutorRegistry.cs" />
@@ -78,7 +80,6 @@
     <Compile Include="Serialization\Providers\ContractStreamEntriesProvider.cs" />
     <Compile Include="Serialization\Providers\ConvertingMemberStreamEntriesProvider.cs" />
     <Compile Include="Serialization\Providers\DefaultMemberStreamEntriesProvider.cs" />
-    <Compile Include="Serialization\Providers\EmptyContractStreamEntriesProvider.cs" />
     <Compile Include="Serialization\Providers\ListStreamEntriesProvider.cs" />
     <Compile Include="Serialization\Providers\IStreamEntriesProvider.cs" />
     <Compile Include="Serialization\Providers\RootContractStreamEntriesProvider.cs" />

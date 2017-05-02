@@ -10,7 +10,9 @@ namespace BinarySerializer.Serialization.Providers
     {
         public bool GetIsApplicable(ContractMemberAdapter memberAdapter, SerializationContext serializationContext)
         {
-            return memberAdapter.Children != null && memberAdapter.Children.Any();
+            return
+                memberAdapter.Type
+                    .ContractIsCreatable(); //memberAdapter.Children != null && memberAdapter.Children.Any();
         }
 
         public IEnumerable<ISerializationStreamEntry> Provide(ContractMemberAdapter memberAdapter,

@@ -10,7 +10,9 @@ namespace BinarySerializer.Deserialization.Stream
     {
         protected readonly List<IDeserializationExecutor> Executors = new List<IDeserializationExecutor>
         {
-            new ConvertingDeserializationExecutor()
+            new ConvertingDeserializationExecutor(),
+            new ListDeserializationExecutor(),
+            new ContractDeserializationExecutor()
         };
 
         public IDeserializationExecutor GetExecutor(ContractMemberAdapter memberAdapter,
