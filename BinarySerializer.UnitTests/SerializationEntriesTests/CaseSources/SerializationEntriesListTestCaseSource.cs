@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using BinarySerializer.Serialization.Entries;
 using BinarySerializer.UnitTests.Contracts;
+using BinarySerializer.UnitTests.SerializationEntriesTests.Cases;
 
-namespace BinarySerializer.UnitTests.SerializationEntriesCases
+namespace BinarySerializer.UnitTests.SerializationEntriesTests.CaseSources
 {
     public class SerializationEntriesListTestCaseSource
     {
@@ -40,7 +41,7 @@ namespace BinarySerializer.UnitTests.SerializationEntriesCases
                         ListInt = new List<int>
                         {
                             7,
-                            14,
+                            0,
                             341
                         }
                     },
@@ -64,7 +65,7 @@ namespace BinarySerializer.UnitTests.SerializationEntriesCases
                     new MemberHeaderEntry(701),
                     new ConvertationEntry(typeof(int), 3),
                     new ConvertationEntry(typeof(int), 7),
-                    new ConvertationEntry(typeof(int), 14),
+                    new ConvertationEntry(typeof(int), 0),
                     new ConvertationEntry(typeof(int), 341),
                     new MemberEndingEntry(),
                     new MemberHeaderEntry(1),
@@ -105,7 +106,7 @@ namespace BinarySerializer.UnitTests.SerializationEntriesCases
             yield return new SerializationEntriesTestCase("ListComplexEmpty", new List<ListComplexObject>(),
                 new List<ISerializationStreamEntry>
                 {
-                    //new MemberEndingEntry()
+
                 });
             yield return new SerializationEntriesTestCase("ListComplexNestedEmpty",
                 new List<ListComplexObject> {new ListComplexObject()}, new List<ISerializationStreamEntry>

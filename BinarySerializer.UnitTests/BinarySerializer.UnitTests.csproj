@@ -65,14 +65,18 @@
     <Compile Include="ConverterTests\ConverterReadTests.cs" />
     <Compile Include="ConverterTests\ConverterWriteTests.cs" />
     <Compile Include="ConverterTests\StringConverterTests.cs" />
-    <Compile Include="EmptyObjectsTests.cs" />
-    <Compile Include="EmptyTestCaseSource.cs" />
-    <Compile Include="SerializationEntriesCases\SerializationEntriesComplexObjectTestCaseSource.cs" />
-    <Compile Include="SerializationEntriesCases\SerializationEntriesListTestCaseSource.cs" />
-    <Compile Include="SerializationEntriesCases\SerializationEntriesTestCase.cs" />
-    <Compile Include="SerializationEntriesTests.cs" />
+    <Compile Include="SerializationEntriesTests\Cases\SerializationEntriesTestCase.cs" />
+    <Compile Include="SerializationEntriesTests\CaseSources\SerializationEntriesComplexObjectTestCaseSource.cs" />
+    <Compile Include="SerializationEntriesTests\CaseSources\SerializationEntriesListTestCaseSource.cs" />
+    <Compile Include="SerializationEntriesTests\SerializationEntriesTests.cs" />
+    <Compile Include="SerializationTests\CaseSources\ComplexObjectsTestCaseSource.cs" />
+    <Compile Include="SerializationTests\CaseSources\EmptyObjectsTestCaseSource.cs" />
+    <Compile Include="SerializationTests\CaseSources\ListTestCaseSource.cs" />
+    <Compile Include="SerializationTests\CaseSources\SingleObjectsTestCaseSource.cs" />
+    <Compile Include="SerializationTests\Cases\SerializationTestCase.cs" />
+    <Compile Include="SerializationTests\DeserializationTests.cs" />
+    <Compile Include="SerializationTests\SerializationTests.cs" />
     <Compile Include="StreamEntriesProvidersTests\EnumerableStreamEntriesProviderTests.cs" />
-    <Compile Include="Tests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

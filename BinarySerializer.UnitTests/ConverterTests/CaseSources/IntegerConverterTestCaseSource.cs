@@ -17,6 +17,8 @@ namespace BinarySerializer.UnitTests.ConverterTests.CaseSources
             yield return new IntConverterTestCase(int.MaxValue, new byte[] {0x04, 0x7F, 0xFF, 0xFF, 0xFF});
             yield return new IntConverterTestCase(int.MinValue, new byte[] {0x14, 0x7F, 0xFF, 0xFF, 0xFF});
             yield return new IntConverterTestCase(-1000, new byte[] {0x12, 0x03, 0xE7});
+            yield return new IntConverterTestCase(-421, new byte[] {0x12, 0x01, 0xA4});
+            yield return new IntConverterTestCase(-65538, new byte[] {0x13, 0x01, 0x00, 0x01});
             yield return new IntConverterTestCase(-1, new byte[] {0x10});
             yield return new IntConverterTestCase(-2, new byte[] {0x11, 0x01});
             yield return new IntConverterTestCase(0, new byte[] {0x80});

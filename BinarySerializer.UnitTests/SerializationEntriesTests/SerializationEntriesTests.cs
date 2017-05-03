@@ -4,11 +4,11 @@ using BinarySerializer.Extensions;
 using BinarySerializer.Serialization;
 using BinarySerializer.Serialization.Entries;
 using BinarySerializer.Serialization.Stream;
-using BinarySerializer.UnitTests.SerializationEntriesCases;
+using BinarySerializer.UnitTests.SerializationEntriesTests.CaseSources;
 using NUnit.Framework;
 using Rhino.Mocks;
 
-namespace BinarySerializer.UnitTests
+namespace BinarySerializer.UnitTests.SerializationEntriesTests
 {
     public class SerializationEntriesTests
     {

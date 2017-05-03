@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using BinarySerializer.Serialization.Entries;
 using BinarySerializer.UnitTests.Contracts;
+using BinarySerializer.UnitTests.SerializationEntriesTests.Cases;
 
-namespace BinarySerializer.UnitTests.SerializationEntriesCases
+namespace BinarySerializer.UnitTests.SerializationEntriesTests.CaseSources
 {
     public class SerializationEntriesComplexObjectTestCaseSource : IEnumerable
     {

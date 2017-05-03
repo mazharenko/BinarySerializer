@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
-using System.Runtime.Serialization;
 using BinarySerializer.Serialization.Entries;
 using NUnit.Framework;
 
-namespace BinarySerializer.UnitTests.SerializationEntriesCases
+namespace BinarySerializer.UnitTests.SerializationEntriesTests.Cases
 {
     public class SerializationEntriesTestCase : TestCaseData
     {
