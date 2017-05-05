@@ -9,7 +9,7 @@ namespace BinarySerializer.Serialization.Providers
     {
         public bool GetIsApplicable(ContractMemberAdapter memberAdapter, SerializationContext serializationContext)
         {
-            return memberAdapter.GetValue() == memberAdapter.Type.Default();
+            return Equals(memberAdapter.GetValue(), memberAdapter.Type.Default());
         }
 
         public IEnumerable<ISerializationStreamEntry> Provide(ContractMemberAdapter memberAdapter,

@@ -11,7 +11,6 @@ namespace BinarySerializer.Serialization.Stream
         protected readonly List<IStreamEntriesProvider> Providers = new List<IStreamEntriesProvider>
         {
             new DefaultMemberStreamEntriesProvider(),
-        //    new EmptyContractStreamEntriesProvider(),
             new SingleObjectStreamEntitiesProvider(),
             new ConvertingMemberStreamEntriesProvider(),
             new ListStreamEntriesProvider(),
