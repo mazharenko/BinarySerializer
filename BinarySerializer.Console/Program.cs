@@ -7,14 +7,12 @@ using Newtonsoft.Json;
 
 namespace BinarySerializer.Console
 {
-    internal class Program
+    internal partial class Program
     {
         public static void Main(string[] args)
         {
             try
             {
-
-                string invokedVerb = null;
                 object invokedVerbInstance = null;
 
                 var options = new Options();
@@ -23,17 +21,15 @@ namespace BinarySerializer.Console
                     {
                         // if parsing succeeds the verb name and correct instance
                         // will be passed to onVerbCommand delegate (string,object)
-                        invokedVerb = verb;
                         invokedVerbInstance = subOptions;
                     }))
                 {
                     Environment.Exit(CommandLine.Parser.DefaultExitCodeFail);
                 }
 
-                if (invokedVerb == "serialize")
-                {
-                    Serialize((SerializeOptions)invokedVerbInstance);
-                }
+                var type = GetType((BaseOptions)invokedVerbInstance);
+                Process((dynamic)invokedVerbInstance, type);
+
             }
             catch (Exception e)
             {
@@ -42,40 +38,28 @@ namespace BinarySerializer.Console
             }
         }
 
-        public static void Serialize(SerializeOptions options)
+        public static Stream GetInputStream(string file)
         {
-            string objectString;
+            return file != null ? File.OpenRead(file) : System.Console.OpenStandardInput();
+        }
+
+        public static Stream GetOutputStream(string file)
+        {
+            return file != null ? File.Create(file) : System.Console.OpenStandardOutput();
+        }
+
+        public static Type GetType(BaseOptions options)
+        {
             Type type;
 
             if (options.Assembly != null)
             {
                 var assembly = Assembly.LoadFrom(Path.GetFullPath(options.Assembly));
-                type = assembly.GetType(options.InputType, true);
+                type = assembly.GetType(options.Type, true);
             }
             else
-                type = Type.GetType(options.InputType, true);
-
-            if (options.Input != null)
-            {
-                objectString = File.ReadAllText(options.Input);
-            }
-            else
-            {
-                using (var reader = new StreamReader(System.Console.OpenStandardInput(8192)))
-                    objectString = reader.ReadToEnd();
-            }
-
-            var @object = JsonConvert.DeserializeObject(objectString, type);
-
-            Stream stream;
-            if (options.Output != null)
-                stream = File.Create(options.Output);
-            else
-                stream = System.Console.OpenStandardOutput();
-
-            using (stream)
-                ContractSerializer.Serialize(@object, stream);
-
+                type = Type.GetType(options.Type, true);
+            return type;
         }
     }
 }

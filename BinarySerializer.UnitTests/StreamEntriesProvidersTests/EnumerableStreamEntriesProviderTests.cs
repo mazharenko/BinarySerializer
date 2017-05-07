@@ -30,7 +30,7 @@ namespace BinarySerializer.UnitTests.StreamEntriesProvidersTests
         [TestCase(typeof(IList), false)]
         [TestCase(typeof(IList<>), false)]
         [TestCase(typeof(List<>), false)]
-        [TestCase(typeof(int[]), true)]//TODO: се равно не создать
+        [TestCase(typeof(int[]), true)]
         public void TestIsApplicable(Type memberType, bool expected)
         {
             var member = MockRepository.GenerateStrictMock<ContractMemberAdapter>(null, null);
