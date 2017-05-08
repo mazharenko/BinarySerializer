@@ -15,7 +15,10 @@ namespace BinarySerializer.Base
                 new IntConverter(),
                 new LongConverter(),
                 new UIntConverter(),
-                new ULongConverter()
+                new ULongConverter(),
+                new StringConverter(),
+                new ByteConverter(),
+                new SByteConverter()
             });
         }
         public ConvertersCollection Converters { get; }
