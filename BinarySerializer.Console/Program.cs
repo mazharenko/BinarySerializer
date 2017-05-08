@@ -33,7 +33,7 @@ namespace BinarySerializer.Console
             }
             catch (Exception e)
             {
-                System.Console.WriteLine(e);
+                System.Console.Error.WriteLine(e);
                 Environment.Exit(1);
             }
         }
