@@ -1,35 +1,44 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.Contracts;
 using System.IO;
 using System.Reflection;
 using Newtonsoft.Json;
 
 namespace BinarySerializer.Console
 {
-    internal partial class Program
+    internal delegate void ProcessingDelegate(Type type, Stream input, Stream output);
+
+    internal class Program
     {
+        private static readonly IDictionary<string, ProcessingDelegate> ProcessingActions =
+            new Dictionary<string, ProcessingDelegate>
+            {
+                {Verbs.Serialize, Serialize},
+                {Verbs.Deserialize, Deserialize}
+            };
+
         public static void Main(string[] args)
         {
             try
             {
-                object invokedVerbInstance = null;
+                string invokedVerb = null;
+                IOptions invokedVerbInstance = null;
 
                 var options = new Options();
                 if (!CommandLine.Parser.Default.ParseArguments(args, options,
                     (verb, subOptions) =>
                     {
-                        // if parsing succeeds the verb name and correct instance
-                        // will be passed to onVerbCommand delegate (string,object)
-                        invokedVerbInstance = subOptions;
+                        invokedVerb = verb;
+                        invokedVerbInstance = (IOptions) subOptions;
                     }))
                 {
                     Environment.Exit(CommandLine.Parser.DefaultExitCodeFail);
                 }
 
-                var type = GetType((BaseOptions)invokedVerbInstance);
-                Process((dynamic)invokedVerbInstance, type);
-
+                var type = GetType(invokedVerbInstance);
+                using (var input = GetInputStream(invokedVerbInstance))
+                using (var output = GetOutputStream(invokedVerbInstance))
+                    ProcessingActions[invokedVerb](type, input, output);
             }
             catch (Exception e)
             {
@@ -38,17 +47,39 @@ namespace BinarySerializer.Console
             }
         }
 
-        public static Stream GetInputStream(string file)
+        public static void Serialize(Type type, Stream input, Stream output)
         {
-            return file != null ? File.OpenRead(file) : System.Console.OpenStandardInput();
+            using (var reader = new StreamReader(input))
+            {
+                var objectString = reader.ReadToEnd();
+
+                var @object = JsonConvert.DeserializeObject(objectString, type);
+
+                ContractSerializer.Serialize(@object, output);
+            }
         }
 
-        public static Stream GetOutputStream(string file)
+        public static void Deserialize(Type type, Stream input, Stream output)
         {
-            return file != null ? File.Create(file) : System.Console.OpenStandardOutput();
+            var deserialized = ContractSerializer.Deserialize(type, input);
+
+            var objectString = JsonConvert.SerializeObject(deserialized);
+
+            using (var writer = new StreamWriter(output))
+                writer.Write(objectString);
         }
 
-        public static Type GetType(BaseOptions options)
+        public static Stream GetInputStream(IOptions options)
+        {
+            return options.Input != null ? File.OpenRead(options.Input) : System.Console.OpenStandardInput();
+        }
+
+        public static Stream GetOutputStream(IOptions options)
+        {
+            return options.Output != null ? File.Create(options.Output) : System.Console.OpenStandardOutput();
+        }
+
+        public static Type GetType(IOptions options)
         {
             Type type;
 

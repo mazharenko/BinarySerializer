@@ -50,12 +50,12 @@
   <ItemGroup>
     <Compile Include="BaseOptions.cs" />
     <Compile Include="DeserializeOptions.cs" />
+    <Compile Include="IOptions.cs" />
     <Compile Include="Options.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="Program.Deserialize.cs" />
-    <Compile Include="Program.Serialize.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SerializeOptions.cs" />
+    <Compile Include="Verbs.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

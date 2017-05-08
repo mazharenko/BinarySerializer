@@ -2,7 +2,7 @@
 
 namespace BinarySerializer.Console
 {
-    public class DeserializeOptions : BaseOptions
+    public class DeserializeOptions : BaseOptions, IOptions
     {
         [Option('i', "input", HelpText = "File containing a serialized object")]
         public string Input { get; set; }
