@@ -3,16 +3,16 @@ using NUnit.Framework;
 
 namespace BinarySerializer.UnitTests.ConverterTests.Cases
 {
-    public class UniversalConverterTestCase<T> : TestCaseData
+    public class UniversalConverterTestCase<T, TSub> : TestCaseData
     {
         public T Object { get; }
-        public byte[] Bytes { get; }
+        public TSub ObjectSub { get; }
 
-        public UniversalConverterTestCase(T @object, byte[] bytes, string key, Type converterType)
-            : base(@object, bytes, converterType)
+        public UniversalConverterTestCase(T @object, TSub sub, string key, Type converterType)
+            : base(@object, sub, converterType)
         {
             Object = @object;
-            Bytes = bytes;
+            ObjectSub = sub;
             TestName = $"Test{key}Converter({@object})";
         }
     }

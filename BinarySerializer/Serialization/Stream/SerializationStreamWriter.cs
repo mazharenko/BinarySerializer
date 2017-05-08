@@ -17,17 +17,17 @@ namespace BinarySerializer.Serialization.Stream
 
          private static void WriteActual(MemberHeaderEntry entry, SerializationContext context)
          {
-             context.FindConverter(entry.Id.GetType()).Write(entry.Id, context.Stream);
+             context.GetConverter(entry.Id.GetType()).Write(entry.Id, context.Stream);
          }
 
          private static void WriteActual(ConvertationEntry entry, SerializationContext context)
          {
-             context.FindConverter(entry.Type).Write(entry.Value, context.Stream);
+             context.GetConverter(entry.Type).Write(entry.Value, context.Stream);
          }
 
          private static void WriteActual(MemberEndingEntry entry, SerializationContext context)
          {
-             context.FindConverter(Constants.MemberEndMark.GetType()).Write(Constants.MemberEndMark, context.Stream);
+             context.GetConverter(Constants.MemberEndMark.GetType()).Write(Constants.MemberEndMark, context.Stream);
          }
      }
  }

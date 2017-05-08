@@ -18,7 +18,7 @@ namespace BinarySerializer.Deserialization.Executors
         {
             var elementType = member.Type.GetIListImlementaionElementType();
             var list = (IList) Activator.CreateInstance(typeof(List<>).MakeGenericType(elementType));
-            var complex = context.FindConverter(elementType) == null;
+            var complex = context.GetConverter(elementType) == null;
 
             if (complex)
                 ExecuteComplex(member, list, context);
@@ -35,7 +35,7 @@ namespace BinarySerializer.Deserialization.Executors
             {
                 object idObject;
 
-                if (!context.FindConverter(typeof(int)).Read(context.Stream).ExtractValue(out idObject))
+                if (!context.GetConverter(typeof(int)).Read(context.Stream).ExtractValue(out idObject))
                     if (member is ContractRootAdapter)
                         break;
                     else
@@ -58,10 +58,10 @@ namespace BinarySerializer.Deserialization.Executors
         private void ExecuteSimple(ContractMemberAdapter member, IList list, DeserializationContext context)
         {
             var elementType = member.Type.GetIListImlementaionElementType();
-            var count = (int) context.FindConverter(typeof(int)).Read(context.Stream).ExtractValue();
+            var count = (int) context.GetConverter(typeof(int)).Read(context.Stream).ExtractValue();
             while (count-- > 0)
             {
-                list.Add(context.FindConverter(elementType).Read(context.Stream).ExtractValue());
+                list.Add(context.GetConverter(elementType).Read(context.Stream).ExtractValue());
             }
         }
 

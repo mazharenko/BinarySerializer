@@ -28,7 +28,7 @@ namespace BinarySerializer.UnitTests.ConverterTests.CaseSources
         {
             return GetInt32Cases()
                 .OfType<IntConverterTestCase>()
-                .Select(c => new LongConverterTestCase(c.Object, c.Bytes))
+                .Select(c => new LongConverterTestCase(c.Object, c.ObjectSub))
                 .Concat(new List<LongConverterTestCase>
                 {
                     new LongConverterTestCase(long.MaxValue,

@@ -8,7 +8,7 @@ namespace BinarySerializer.Serialization.Providers
     {
         public bool GetIsApplicable(ContractMemberAdapter memberAdapter, SerializationContext serializationContext)
         {
-            return serializationContext.FindConverter(memberAdapter.Type) != null;
+            return serializationContext.GetConverter(memberAdapter.Type) != null;
         }
 
         public IEnumerable<ISerializationStreamEntry> Provide(ContractMemberAdapter memberAdapter, SerializationContext serializationContext)

@@ -13,8 +13,8 @@ namespace BinarySerializer.UnitTests.ConverterTests.CaseSources
 
         public IEnumerator GetEnumerator()
         {
-            yield return new UniversalConverterTestCase<string>(string.Empty, new byte[] {0x00}, Key, ConverterType);
-            yield return new UniversalConverterTestCase<string>("Foo © bar 𝌆 baz ☃ qux",
+            yield return new UniversalConverterTestCase<string, byte[]>(string.Empty, new byte[] {0x00}, Key, ConverterType);
+            yield return new UniversalConverterTestCase<string, byte[]>("Foo © bar 𝌆 baz ☃ qux",
                 new byte[]
                 {
                     0x46, 0x6F, 0x6F, 0x20, 0xC2, 0xA9, 0x20, 0x62, 0x61, 0x72, 0x20, 0xF0, 0x9D, 0x8C, 0x86, 0x20,
@@ -142,9 +142,9 @@ namespace BinarySerializer.UnitTests.ConverterTests.CaseSources
 
         public static IEnumerable GetWriteCases()
         {
-            yield return new UniversalConverterTestCase<string>("\0\0\0", new byte[] {0x00}, Key, ConverterType);
-            yield return new UniversalConverterTestCase<string>("\0\0\0ddd", new byte[] {0x00}, Key, ConverterType);
-            yield return new UniversalConverterTestCase<string>("x\0n\0s\0g", new byte[] {0x78, 0x00}, Key,
+            yield return new UniversalConverterTestCase<string, byte[]>("\0\0\0", new byte[] {0x00}, Key, ConverterType);
+            yield return new UniversalConverterTestCase<string, byte[]>("\0\0\0ddd", new byte[] {0x00}, Key, ConverterType);
+            yield return new UniversalConverterTestCase<string, byte[]>("x\0n\0s\0g", new byte[] {0x78, 0x00}, Key,
                 ConverterType);
         }
     }

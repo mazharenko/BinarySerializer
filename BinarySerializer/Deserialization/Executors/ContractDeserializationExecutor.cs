@@ -19,7 +19,7 @@ namespace BinarySerializer.Deserialization.Executors
             {
                 object idObject;
 
-                if (!context.FindConverter(typeof(int)).Read(context.Stream).ExtractValue(out idObject))
+                if (!context.GetConverter(typeof(int)).Read(context.Stream).ExtractValue(out idObject))
                     if (member is ContractRootAdapter)
                         break;
                     else

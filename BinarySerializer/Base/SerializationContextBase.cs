@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using BinarySerializer.Converters;
+using BinarySerializer.Converters.Base;
 
 namespace BinarySerializer.Base
 {
@@ -16,9 +17,9 @@ namespace BinarySerializer.Base
 
         public Stream Stream { get; }
 
-        public IConverter FindConverter(Type type)
+        public IConverter GetConverter(Type type)
         {
-            return Settings.Converters.Find(type);
+            return Settings.Converters.GetConverter(type);
         }
     }
 }

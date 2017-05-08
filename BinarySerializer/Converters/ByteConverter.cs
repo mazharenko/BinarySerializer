@@ -1,5 +1,6 @@
 using System.IO;
 using System.Linq;
+using BinarySerializer.Converters.Base;
 
 namespace BinarySerializer.Converters
 {

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using BinarySerializer.Converters;
 using BinarySerializer.Converters.Integer;
+using BinarySerializer.Converters.Registry;
 
 namespace BinarySerializer.Base
 {
@@ -8,19 +9,8 @@ namespace BinarySerializer.Base
     {
         protected SerializationSettingsBase()
         {
-            // TODO: на добавление проверять, не контракт ли это с нашей т.з.
-            Converters = new ConvertersCollection(new List<IConverter>
-            {
-                new BooleanConverter(),
-                new IntConverter(),
-                new LongConverter(),
-                new UIntConverter(),
-                new ULongConverter(),
-                new StringConverter(),
-                new ByteConverter(),
-                new SByteConverter()
-            });
+            Converters = new ConverterRegistry();
         }
-        public ConvertersCollection Converters { get; }
+        public IConverterRegistry Converters { get; }
     }
 }

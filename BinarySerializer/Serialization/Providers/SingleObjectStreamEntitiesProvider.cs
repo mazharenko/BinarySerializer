@@ -10,7 +10,7 @@ namespace BinarySerializer.Serialization.Providers
         public bool GetIsApplicable(ContractMemberAdapter memberAdapter, SerializationContext serializationContext)
         {
             return memberAdapter is ContractSingleObjectAdapter
-                   && serializationContext.FindConverter(memberAdapter.Type) != null;
+                   && serializationContext.GetConverter(memberAdapter.Type) != null;
         }
 
         public IEnumerable<ISerializationStreamEntry> Provide(ContractMemberAdapter memberAdapter,

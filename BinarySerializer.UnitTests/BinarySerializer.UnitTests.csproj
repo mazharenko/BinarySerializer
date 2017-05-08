@@ -33,6 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="Rhino.Mocks, Version=3.6.0.0, Culture=neutral, PublicKeyToken=0b3305902db7183f">
       <HintPath>..\packages\RhinoMocks.3.6.1\lib\net\Rhino.Mocks.dll</HintPath>
     </Reference>
@@ -53,7 +54,9 @@
     <Compile Include="Contracts\ListComplexObject.cs" />
     <Compile Include="Contracts\SubComplexObject.cs" />
     <Compile Include="Contracts\Empty.cs" />
+    <Compile Include="ConverterTests\BooleanObjectConverter.cs" />
     <Compile Include="ConverterTests\CaseSources\BooleanConverterTestCaseSource.cs" />
+    <Compile Include="ConverterTests\CaseSources\BooleanObjectConverterTestCaseSource.cs" />
     <Compile Include="ConverterTests\CaseSources\IntegerConverterTestCaseSource.cs" />
     <Compile Include="ConverterTests\CaseSources\StringConverterTestCaseSource.cs" />
     <Compile Include="ConverterTests\Cases\BaseConverterTestCase.cs" />

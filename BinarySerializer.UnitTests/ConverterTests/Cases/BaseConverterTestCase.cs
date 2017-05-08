@@ -2,7 +2,7 @@
 
 namespace BinarySerializer.UnitTests.ConverterTests.Cases
 {
-    public abstract class BaseConverterTestCase<T> : UniversalConverterTestCase<T>
+    public abstract class BaseConverterTestCase<T> : UniversalConverterTestCase<T, byte[]>
     {
         protected abstract string Key { get; }
 

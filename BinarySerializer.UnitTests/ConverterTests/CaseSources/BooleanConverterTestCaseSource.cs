@@ -12,8 +12,8 @@ namespace BinarySerializer.UnitTests.ConverterTests.CaseSources
 
         public IEnumerator GetEnumerator()
         {
-            yield return new UniversalConverterTestCase<bool>(true, new byte[] {0xFF}, Key, ConverterType);
-            yield return new UniversalConverterTestCase<bool>(false, new byte[] {0x00}, Key, ConverterType);
+            yield return new UniversalConverterTestCase<bool, byte[]>(true, new byte[] {0xFF}, Key, ConverterType);
+            yield return new UniversalConverterTestCase<bool, byte[]>(false, new byte[] {0x00}, Key, ConverterType);
         }
     }
 }

@@ -21,7 +21,7 @@ namespace BinarySerializer.Serialization.Providers
             var elementType = memberAdapter.Type.GetIListImlementaionElementType();
             var list = (IList) memberAdapter.GetValue();
 
-            var complex = serializationContext.FindConverter(elementType) == null;
+            var complex = serializationContext.GetConverter(elementType) == null;
 
             if (!(memberAdapter is ContractSingleObjectAdapter))
                 yield return new MemberHeaderEntry(memberAdapter.Id);
