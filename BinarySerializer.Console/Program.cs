@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Odbc;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -42,7 +41,7 @@ namespace BinarySerializer.Console
 
                 var type = GetType(invokedVerbInstance);
                 var converters = CollectConverters(invokedVerbInstance);
-                using (var input = GetInputStream(invokedVerbInstance))
+                using (var input = GetInputStream((dynamic)invokedVerbInstance))
                 using (var output = GetOutputStream(invokedVerbInstance))
                     ProcessingActions[invokedVerb](type, input, output, converters.ToList());
             }
@@ -99,6 +98,14 @@ namespace BinarySerializer.Console
         public static Stream GetInputStream(IOptions options)
         {
             return options.Input != null ? File.OpenRead(options.Input) : System.Console.OpenStandardInput();
+        }
+
+        public static Stream GetInputStream(DeserializeOptions options)
+        {
+            var actual = GetInputStream((IOptions) options);
+            if (!options.Base64)
+                return actual;
+            return new MemoryStream(Convert.FromBase64String(new StreamReader(actual).ReadToEnd()));
         }
 
         public static Stream GetOutputStream(IOptions options)
