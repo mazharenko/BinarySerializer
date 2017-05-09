@@ -46,14 +46,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Contracts\BooleanObject.cs" />
-    <Compile Include="Contracts\ComplexObject.cs" />
-    <Compile Include="Contracts\EmptyHolder.cs" />
-    <Compile Include="Contracts\EmptySubHolder.cs" />
-    <Compile Include="Contracts\Generic.cs" />
-    <Compile Include="Contracts\ListComplexObject.cs" />
-    <Compile Include="Contracts\SubComplexObject.cs" />
-    <Compile Include="Contracts\Empty.cs" />
     <Compile Include="ConverterTests\BooleanObjectConverter.cs" />
     <Compile Include="ConverterTests\CaseSources\BooleanConverterTestCaseSource.cs" />
     <Compile Include="ConverterTests\CaseSources\BooleanObjectConverterTestCaseSource.cs" />
@@ -86,6 +78,10 @@
     <ProjectReference Include="..\BinarySerializer\BinarySerializer.csproj">
       <Project>{6B484A5E-988E-4924-98BB-522B39B595F2}</Project>
       <Name>BinarySerializer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Contracts\Contracts.csproj">
+      <Project>{18beb497-6756-4b18-8b2b-9ce8901a777d}</Project>
+      <Name>Contracts</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

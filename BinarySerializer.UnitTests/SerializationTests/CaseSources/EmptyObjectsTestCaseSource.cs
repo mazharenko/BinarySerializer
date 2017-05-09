@@ -1,6 +1,6 @@
 ﻿using System.Collections;
-using BinarySerializer.UnitTests.Contracts;
 using BinarySerializer.UnitTests.SerializationTests.Cases;
+using Contracts;
 
 namespace BinarySerializer.UnitTests.SerializationTests.CaseSources
 {

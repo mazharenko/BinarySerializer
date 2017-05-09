@@ -44,6 +44,24 @@
     <Compile Include="StringAccurateConverter.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Scripts\Complex\deserialize1.input.bin" >
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\Complex\deserialize1.sh">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\Complex\deserialize2.input.bin" >
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\Complex\deserialize2.sh">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\Complex\serialize2.input.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\Complex\serialize2.sh">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Scripts\Simple\deserialize1.sh">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -62,6 +80,24 @@
     <Content Include="Scripts\Custom\deserialize1.sh">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Scripts\Complex\serialize1.sh">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\Complex\serialize1.input.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\Complex\deserialize1.sh">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\Complex\deserialize1.input.bin">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\Complex\deserialize2.sh">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\Complex\deserialize2.input.bin">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Scripts\Simple\serialize2.sh">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -77,6 +113,10 @@
     <ProjectReference Include="..\BinarySerializer\BinarySerializer.csproj">
       <Project>{6b484a5e-988e-4924-98bb-522b39b595f2}</Project>
       <Name>BinarySerializer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Contracts\Contracts.csproj">
+      <Project>{18beb497-6756-4b18-8b2b-9ce8901a777d}</Project>
+      <Name>Contracts</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

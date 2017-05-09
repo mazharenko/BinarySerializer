@@ -1,5 +1,5 @@
 ﻿using BinarySerializer.Converters.Base;
-using BinarySerializer.UnitTests.Contracts;
+using Contracts;
 
 namespace BinarySerializer.UnitTests.ConverterTests
 {

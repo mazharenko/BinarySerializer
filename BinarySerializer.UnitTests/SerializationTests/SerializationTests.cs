@@ -1,5 +1,4 @@
-﻿using BinarySerializer.UnitTests.Contracts;
-using BinarySerializer.UnitTests.SerializationTests.CaseSources;
+﻿using BinarySerializer.UnitTests.SerializationTests.CaseSources;
 using NUnit.Framework;
 
 namespace BinarySerializer.UnitTests.SerializationTests

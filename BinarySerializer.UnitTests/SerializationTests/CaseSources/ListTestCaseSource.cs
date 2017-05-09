@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using BinarySerializer.UnitTests.Contracts;
 using BinarySerializer.UnitTests.SerializationTests.Cases;
+using Contracts;
 
 namespace BinarySerializer.UnitTests.SerializationTests.CaseSources
 {

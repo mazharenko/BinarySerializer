@@ -1,0 +1,10 @@
+{
+    "IgnoredInt": 30,
+    "SubComplexObject": {
+        "Boolean": {
+            "Boolean": true,
+            "BooleanField": true
+        },
+        "Integer": -421
+    }
+}
