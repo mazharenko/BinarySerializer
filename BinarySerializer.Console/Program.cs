@@ -1,12 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Odbc;
 using System.IO;
+using System.Linq;
 using System.Reflection;
+using BinarySerializer.Converters.Base;
+using BinarySerializer.Deserialization;
+using BinarySerializer.Serialization;
 using Newtonsoft.Json;
 
 namespace BinarySerializer.Console
 {
-    internal delegate void ProcessingDelegate(Type type, Stream input, Stream output);
+    internal delegate void ProcessingDelegate(Type type, Stream input, Stream output, List<IConverterBase> converters);
 
     internal class Program
     {
@@ -36,9 +41,10 @@ namespace BinarySerializer.Console
                 }
 
                 var type = GetType(invokedVerbInstance);
+                var converters = CollectConverters(invokedVerbInstance);
                 using (var input = GetInputStream(invokedVerbInstance))
                 using (var output = GetOutputStream(invokedVerbInstance))
-                    ProcessingActions[invokedVerb](type, input, output);
+                    ProcessingActions[invokedVerb](type, input, output, converters.ToList());
             }
             catch (Exception e)
             {
@@ -47,7 +53,22 @@ namespace BinarySerializer.Console
             }
         }
 
-        public static void Serialize(Type type, Stream input, Stream output)
+        private static IEnumerable<IConverterBase> CollectConverters(IOptions invokedVerbInstance)
+        {
+            if (invokedVerbInstance.ConverterAssemblies == null
+                || !invokedVerbInstance.ConverterAssemblies.Any())
+                return Enumerable.Empty<IConverterBase>();
+
+            var assemblies = invokedVerbInstance.ConverterAssemblies.Select(Assembly.LoadFrom);
+            return assemblies.SelectMany(a => a.GetTypes())
+                .Where(t => typeof(ISubConverter).IsAssignableFrom(t)
+                            || typeof(IConverter).IsAssignableFrom(t))
+                .Where(t => t.GetConstructor(new Type[0]) != null)
+                .Select(Activator.CreateInstance)
+                .Cast<IConverterBase>();
+        }
+
+        public static void Serialize(Type type, Stream input, Stream output, List<IConverterBase> converters)
         {
             using (var reader = new StreamReader(input))
             {
@@ -55,13 +76,19 @@ namespace BinarySerializer.Console
 
                 var @object = JsonConvert.DeserializeObject(objectString, type);
 
-                ContractSerializer.Serialize(@object, output);
+                var settings = new SerializationSettings();
+                converters.ForEach(c => settings.Converters.AddConverter((dynamic) c));
+
+                ContractSerializer.Serialize(@object, output, settings);
             }
         }
 
-        public static void Deserialize(Type type, Stream input, Stream output)
+        public static void Deserialize(Type type, Stream input, Stream output, List<IConverterBase> converters)
         {
-            var deserialized = ContractSerializer.Deserialize(type, input);
+            var settings = new DeserializationSettings();
+            converters.ForEach(c => settings.Converters.AddConverter((dynamic) c));
+
+            var deserialized = ContractSerializer.Deserialize(type, input, settings);
 
             var objectString = JsonConvert.SerializeObject(deserialized);
 

@@ -9,5 +9,6 @@ namespace BinarySerializer.Console
 
         [Option('o', "output", HelpText = "File-destination for the serialized object. If exists, will be overwritten")]
         public string Output { get; set; }
+
     }
 }

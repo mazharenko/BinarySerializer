@@ -31,15 +31,13 @@ namespace BinarySerializer.Converters.Registry
 
         public IConverter GetConverter(Type type)
         {
-            var c = _converters.Find(type);
-            if (c != null) return c;
             var subConverter = _subConverters.Find(type);
             if (subConverter == null)
-                return null;
-            c = GetConverter(subConverter.SubType);
-            if (c == null)
-                return null;
-            return new SubbedConverter(subConverter, c);
+                return _converters.Find(type);
+            var c = GetConverter(subConverter.SubType);
+            if (c != null)
+                return new SubbedConverter(subConverter, c);
+            return _converters.Find(type);
         }
     }
 }
