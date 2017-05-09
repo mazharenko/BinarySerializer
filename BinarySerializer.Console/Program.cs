@@ -90,7 +90,7 @@ namespace BinarySerializer.Console
 
             var deserialized = ContractSerializer.Deserialize(type, input, settings);
 
-            var objectString = JsonConvert.SerializeObject(deserialized);
+            var objectString = JsonConvert.SerializeObject(deserialized, Formatting.Indented);
 
             using (var writer = new StreamWriter(output))
                 writer.Write(objectString);
