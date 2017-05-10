@@ -44,16 +44,13 @@
     <Compile Include="StringAccurateConverter.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Scripts\Complex\deserialize1.bat" >
+    <Content Include="Scripts\Complex\deserialize1.bat">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Scripts\Complex\deserialize1.input.bin">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Scripts\Complex\deserialize1.sh">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Scripts\Complex\deserialize2.bat" >
+    <Content Include="Scripts\Complex\deserialize2.bat">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Scripts\Complex\deserialize2.input.bin">
@@ -65,7 +62,7 @@
     <Content Include="Scripts\Complex\serialize1.bat">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Scripts\Complex\serialize2.bat" >
+    <Content Include="Scripts\Complex\serialize2.bat">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Scripts\Complex\serialize2.input.json">
@@ -80,25 +77,25 @@
     <Content Include="Scripts\Custom\serialize1.bat">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Scripts\Simple\deserialize1.bat" >
+    <Content Include="Scripts\Simple\deserialize1.bat">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Scripts\Simple\deserialize1.sh">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Scripts\Simple\deserialize2.bat" >
+    <Content Include="Scripts\Simple\deserialize2.bat">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Scripts\Simple\deserialize2.sh">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Scripts\Simple\deserialize3.bat" >
+    <Content Include="Scripts\Simple\deserialize3.bat">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Scripts\Simple\deserialize3.sh">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Scripts\Simple\serialize1.bat" >
+    <Content Include="Scripts\Simple\serialize1.bat">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Scripts\Simple\serialize1.sh">
@@ -119,22 +116,13 @@
     <Content Include="Scripts\Complex\deserialize1.sh">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Scripts\Complex\deserialize1.input.bin">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Scripts\Complex\deserialize2.sh">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Scripts\Complex\deserialize2.input.bin">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Scripts\Simple\serialize2.bat" >
+    <Content Include="Scripts\Simple\serialize2.bat">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Scripts\Simple\serialize2.sh">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Scripts\Simple\serialize3.bat" >
+    <Content Include="Scripts\Simple\serialize3.bat">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Scripts\Simple\serialize3.sh">
