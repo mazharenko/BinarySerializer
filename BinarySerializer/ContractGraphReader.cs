@@ -5,30 +5,11 @@ using System.Reflection;
 using BinarySerializer.Adapters;
 using BinarySerializer.Attributes;
 using BinarySerializer.Exceptions;
-using BinarySerializer.Extensions;
 
 namespace BinarySerializer
 {
     internal class ContractGraphReader
     {
-        // todo что теперь делать с этой проверкой
-        private void ValidateContractType(Type type)
-        {
-            if (type == null) throw new ArgumentNullException(nameof(type));
-
-
-            // todo: или забить, пусть десериализация упадет, если что
-            // либо создаваемый, либо конвертируемый
-            /*if (type.IsGenericParameter || type.IsGenericTypeDefinition || type.IsAbstract
-                || type.GetConstructor(new Type[0]) == null)
-                throw new InvalidConfigurationException($"The specified type can't by instantiated - {type}");*/
-        }
-
-        private bool IsTerminalType(Type type)
-        {
-            return false;
-        }
-
         public ContractMemberAdapter CollectMembers(Type type, object contract)
         {
             if (contract == null) return null;
@@ -54,9 +35,7 @@ namespace BinarySerializer
         {
             if (contractAdapter == null)
                 return new List<ContractMemberAdapter>();
-
-            ValidateContractType(contractAdapter.Type);
-
+            
             var visitedAttributes = new List<int>();
 
             var properties = from prop in contractAdapter.Type.GetProperties(BindingFlags.Public | BindingFlags.Instance)
@@ -72,8 +51,7 @@ namespace BinarySerializer
             var members = properties.Cast<ContractMemberAdapter>().Concat(fields).ToList();
             members.ForEach(a =>
             {
-                if (!IsTerminalType(a.Type))
-                    CollectMembersInternal(new ObjectDelegatingAdapter(a)).ForEach(a.Children.Add);
+                CollectMembersInternal(new ObjectDelegatingAdapter(a)).ForEach(a.Children.Add);
             });
             return members;
         }
